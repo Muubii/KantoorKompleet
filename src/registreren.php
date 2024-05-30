@@ -1,16 +1,18 @@
 <?php
+    session_start();
     include "database verzoeken/ConnDb.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
-    $myname = $_POST['naam'];
-    $myusername = ( $_POST['gebruikensnaam']);
-    $mypassword = ( $_POST['wachtwoord']);
+    $myname = $_POST['Naam'];
+    $myusername = $_POST['Gebruikersnaam'];
+    $mypassword = $_POST['Wachtwoord'];
     
 
     // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO gebruiker (naam, gebruikensnaam, wachtwoord) VALUES (?, ?, ?)");
+    $stmt = $conn->prepare("INSERT INTO Gebruiker (Naam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
+
     // Bind parameters to the SQL statement
     $stmt->bind_param("sss", $myname, $myusername, $mypassword);
     // Execute the SQL statement
@@ -42,22 +44,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     </nav>
 
 <div class="login-container">
-    <form class="registration-form" action="registreren.html" method="POST">
+    <form class="registration-form" action="registreren.php" method="POST">
         <h1>Registreren</h1>
 
         <div class="form-field">
-            <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" placeholder="Voer je naam in" required>
+            <label for="Naam">Naam:</label>
+            <input type="text" id="Naam" name="Naam" placeholder="Voer je naam in" required>
         </div>
 
         <div class="form-field">
-            <label for="username">Gebruikersnaam:</label>
-            <input type="text" id="username" name="username" placeholder="Voer je gebruikersnaam in" required>
+            <label for="Gebruikersnaam">Gebruikersnaam:</label>
+            <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer je gebruikersnaam in" required>
         </div>
         
         <div class="form-field">
-            <label for="password">Wachtwoord:</label>
-            <input type="password" id="password" name="password" placeholder="Voer je wachtwoord in" required>
+            <label for="Wachtwoord">Wachtwoord:</label>
+            <input type="Wachtwoord" id="Wachtwoord" name="Wachtwoord" placeholder="Voer je wachtwoord in" required>
             <a href="login.php">login</a>
         </div>
 

@@ -1,26 +1,23 @@
-    <?php
-    include "database verzoeken/ConnDb.php";
+<?php
+session_start();
+include "database verzoeken/ConnDb.php";
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+    $myusername = $_POST['Gebruikersnaam'];
+    $mypassword = $_POST['Wachtwoord'];
 
-    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-        $myusername = ( $_POST['Gebruikersnaam']);
-        $mypassword = ( $_POST['Wachtwoord']);
-        
-        $query = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam = '$myusername' and Wachtwoord = '$mypassword'";
-        
-        $result = $conn->query($query);
-        
-        if ($result->num_rows == 1) {
-            $_SESSION['login_user'] = $myusername;
-            
-            header("location: index.html");
-        } else {
-            $error = "Jouw login naam of wachtwoord is incorrect";
-        }
+    $query = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam = '$myusername' AND Wachtwoord = '$mypassword'";
+    $result = $conn->query($query);
+
+    if ($result->num_rows == 1) {
+        $_SESSION['login_user'] = $myusername;
+        header("Location: index.html");
+        exit();
+    } else {
+        $error = "Jouw login naam of wachtwoord is incorrect";
     }
-    ?>
-
-
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
