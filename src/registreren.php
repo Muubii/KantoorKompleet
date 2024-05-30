@@ -1,3 +1,30 @@
+<?php
+    include "database verzoeken/ConnDb.php";
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
+
+    $myname = $_POST['naam'];
+    $myusername = ( $_POST['gebruikensnaam']);
+    $mypassword = ( $_POST['wachtwoord']);
+    
+
+    // Prepare SQL statement
+    $stmt = $conn->prepare("INSERT INTO gebruiker (naam, gebruikensnaam, wachtwoord) VALUES (?, ?, ?)");
+    // Bind parameters to the SQL statement
+    $stmt->bind_param("sss", $myname, $myusername, $mypassword);
+    // Execute the SQL statement
+    if ($stmt->execute()) {
+        header("location: login.php");
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,18 +47,18 @@
 
         <div class="form-field">
             <label for="naam">Naam:</label>
-            <input type="text" id="naam" name="naam" placeholder="Voer je Naam" required>
+            <input type="text" id="naam" name="naam" placeholder="Voer je naam in" required>
         </div>
 
         <div class="form-field">
             <label for="username">Gebruikersnaam:</label>
-            <input type="text" id="username" name="username" placeholder="Voer je Gebruikersnaam" required>
+            <input type="text" id="username" name="username" placeholder="Voer je gebruikersnaam in" required>
         </div>
         
         <div class="form-field">
             <label for="password">Wachtwoord:</label>
-            <input type="password" id="password" name="password" placeholder="Voer je Wachtwoord" required>
-            <a href="login.html">login</a>
+            <input type="password" id="password" name="password" placeholder="Voer je wachtwoord in" required>
+            <a href="login.php">login</a>
         </div>
 
         <button type="submit" name="register">Register</button>

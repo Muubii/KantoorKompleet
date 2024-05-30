@@ -1,3 +1,26 @@
+    <?php
+    include "database verzoeken/ConnDb.php";
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+        $myusername = ( $_POST['Gebruikersnaam']);
+        $mypassword = ( $_POST['Wachtwoord']);
+        
+        $query = "SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam = '$myusername' and Wachtwoord = '$mypassword'";
+        
+        $result = $conn->query($query);
+        
+        if ($result->num_rows == 1) {
+            $_SESSION['login_user'] = $myusername;
+            
+            header("location: index.html");
+        } else {
+            $error = "Jouw login naam of wachtwoord is incorrect";
+        }
+    }
+    ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,30 +42,30 @@
     <form class="login-form" action="" method="POST">
         <h1>Login</h1>
         <div class="form-field">
-            <label for="username">Gebruikersnaam:</label>
-            <input type="text" id="username" name="username" placeholder="Voer je Gebruikersnaam" required>
+            <label for="Gebruikersnaam">Gebruikersnaam:</label>
+            <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer je gebruikersnaam in" required>
         </div>
         
         <div class="form-field">
-            <label for="password">Wachtwoord:</label>
-            <input type="password" id="password" name="password" placeholder="Voer je Wachtwoord" required>
-            <a href="registreren.html">registreren</a>
+            <label for="Wachtwoord">Wachtwoord:</label>
+            <input type="Wachtwoord" id="Wachtwoord" name="Wachtwoord" placeholder="Voer je wachtwoord in" required>
+            <a href="registreren.php">Registreren</a>
         </div>
-        
-        <?php if(isset($error)): ?>
+
+            <?php if(isset($error)): ?>
             <div class="error-message">
                 <?php echo $error; ?>
             </div>
+        <?php endif; ?> 
 
 
         <button type="submit" name="login">Login</button>
     </form>
+</form>
+
 </div>
 
 </body>
-</html>
-
-
 <style>
 .navbar {
     background-color: #79899afa;
@@ -124,3 +147,4 @@ a{
     text-decoration: none;
 }
 </style>
+</html>
