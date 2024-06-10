@@ -1,0 +1,37 @@
+/* de main styles van de website */
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+header{
+    padding: 20px;
+    background-color: rgb(140, 140, 140);
+    height: 300px;
+}
+
+.headerInfo{
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    float: right;
+}
+
+.user_acc{
+    height: 70px;
+    width: 70px;
+    background-color: white;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+.personIcon{
+    width: 50%;
+}
+.logo{
+
+}
