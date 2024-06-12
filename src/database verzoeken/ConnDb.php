@@ -2,7 +2,7 @@
 $servername = "mysql";
 $username = "root";
 $password = "password";
-$database = "Kantoor Compleet";
+$database = "KantoorCompleet";
 
 
 // Create connection
