@@ -1,93 +1,213 @@
+a {
+  color: black;
+  text-decoration: none;
+}
+
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #888;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #888;
 }
 
 .container {
-    display: grid;
-    grid-template-rows: 60px 1fr;
-    grid-template-columns: 200px 1fr;
-    height: 100vh;
+  display: grid;
+  grid-template-rows: 40px 1fr;
+  grid-template-columns: 0px 1fr;
+  height: 100vh;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: grid-template-columns .25s;
+}
+
+.container.menu-open {
+  grid-template-columns: 200px 1fr;
 }
 
 header {
-    grid-column: 1 / span 2;
-    background-color: #ccc;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
+  grid-column: 1 / span 2;
+  background-color: #ccc;
+  display: flex;
+  gap: 1%;
+  align-items: center;
+  padding: 0 80px;
+  transition: opacity .25s;
+}
+
+.container.menu-open header {
+  opacity: 0; /* Hide header content when menu is open */
 }
 
 .title {
-    font-size: 18px;
-    font-weight: bold;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 .header-right {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .header-right input {
-    margin-right: 5px;
+  margin-right: 5px;
 }
 
 .sidebar {
-    background-color: #444444;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+  background-color: #444444;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .sidebar-item {
-    background-color: #bbb;
-    height: 50px;
-    margin-bottom: 10px;
+  background-color: #bbb;
+  height: 50px;
+  margin-bottom: 10px;
 }
 
 .chat-window {
-    background-color: #e0e0e0;
-    display: flex;
-    flex-direction: column;
+  background-color: #e0e0e0;
+  display: flex;
+  flex-direction: column;
 }
 
 .chat-header {
-    background-color: #999;
-    padding: 10px;
+  background-color: #999;
+  padding: 10px;
 }
 
 .chat-content {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px; 
 }
 
 .chat-bubble {
-    background-color: #000;
-    border-radius: 10px;
-    padding: 30px;
-    color: #fff;
+  width: 200px;
+  height: 100px;
+  background-color: #000;
+  border-radius: 0px 50px 50px 50px; 
+  align-self: flex-start; 
+  color: white; 
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.chat-bubble2 {
+  width: 200px;
+  height: 100px;
+  background-color: #000;
+  border-radius: 50px 0px 50px 50px;
+  align-self: flex-end; 
+  color: white; 
+  padding: 20px; 
+  display: flex;
+  align-items: center;
 }
 
 .chat-input {
-    background-color: #aaa;
-    padding: 10px;
+  background-color: #aaa;
+  padding: 10px;
 }
 
 .chat-input input {
-    width: 80%;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
+  width: 80%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
 }
 
-.button{
-    background-color: #000;
-    border-radius: 10px;
-    padding: 10px;
-    color: #fff;
+.button {
+  background-color: #000;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+}
+
+#menu__toggle {
+  opacity: 0;
+}
+
+#menu__toggle:checked + .menu__btn > span {
+  transform: rotate(45deg);
+}
+
+#menu__toggle:checked + .menu__btn > span::before {
+  top: 0;
+  transform: rotate(0deg);
+}
+
+#menu__toggle:checked + .menu__btn > span::after {
+  top: 0;
+  transform: rotate(90deg);
+}
+
+#menu__toggle:checked ~ .menu__box {
+  left: 0 !important;
+}
+
+.menu__btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu__btn > span,
+.menu__btn > span::before,
+.menu__btn > span::after {
+  display: block;
+  position: absolute;
+  width: 80%;
+  height: 2px;
+  background-color: #616161;
+  transition-duration: .25s;
+}
+
+.menu__btn > span::before {
+  content: '';
+  top: -8px;
+}
+
+.menu__btn > span::after {
+  content: '';
+  top: 8px;
+}
+
+.menu__box {
+  display: block;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 200px;
+  height: 100%;
+  margin: 0;
+  padding: 80px 0;
+  list-style: none;
+  background-color: #aaadae;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
+  transition-duration: .25s;
+}
+
+.menu__item {
+  display: block;
+  padding: 12px 24px;
+  color: #333;
+  font-family: 'Roboto', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition-duration: .25s;
+}
+
+.menu__item:hover {
+  background-color: #CFD8DC;
 }
