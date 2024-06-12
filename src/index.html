@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/logoSmall.svg" type="image/icon type">
-    <link href="css/ads.css" rel="stylesheet" type="text/css"/>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/ads.css">
+    <script src="js/header.js"></script>
     <title>Kantoor Compleet</title>
 </head>
 <body>
@@ -17,10 +19,17 @@
             </div>
 
             <nav class="headerNav">
-                <button>chat</button>
-                <button id="plaats">plaats Advertentie</button>
+                <button id="chatbtn" onclick="location.href='chat.html'"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
+                <button id="plaatsaddbtn" onclick="location.href='plaatsadvertentie.html'"><img src="images/logoSmall.svg" alt="icon" class="navIcon">plaats Advertentie</button>
                 <div class="user_acc">
-                <img src="images/icons/personIcon.svg" class="personIcon"></div>
+                    <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
+                    <div class="usermenubox">
+                        <ul class="listUserOptions">
+                            <li class="useroption">Profiel</li>
+                            <li class="useroption">Uitloggen</li>
+                        </ul>
+                    </div>
+                </div>
             </nav>
 
             <nav class="filter">

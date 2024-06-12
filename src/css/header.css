@@ -1,25 +1,23 @@
-/* de main styles van de website */
-::selection {
-    color: white;
-    background: black;
-  }
-
-*{
-    padding: 0px;
-    margin: 0px;
-    box-sizing: border-box;
-}
 
 header{
     padding: 10px;
     background-color: rgb(140, 140, 140);
     
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 950px) {
     .logoTekst {
      display: none;
     }
 }
+@media screen and (max-width: 700px){
+  .headerNav button{
+    color: transparent; /* Verberg de tekst door de kleur transparant te maken */
+    text-indent: -9999px; /* Verplaats de tekst uit het zicht */
+    overflow: hidden; /* Zorg ervoor dat de tekst die buiten het zicht is, niet zichtbaar wordt */
+    white-space: nowrap; /* Voorkom dat de tekst naar de volgende regel springt */
+}   
+}
+
   
 .headerContent{
     display: grid;
@@ -53,19 +51,32 @@ header{
     text-align: center;
     flex-direction: row;
     margin-left: auto;
+    gap: 10px;
     height: 30px
+}
+.headerNav button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    gap: 5px;
+}
+.navIcon{
+    height: 25px;
 }
 
 .user_acc{
-    height: 70px;
-    width: 70px;
+    min-height: 70px;
+    min-width: 70px;
+    max-width: 70px;
     background-color: white;
     border-radius: 100px;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
-    transition: .5s;
+    transition: 1s;
 }
+
 .listUserOptions:last-child{
     border-bottom: 1px solid black;
 }
@@ -102,13 +113,4 @@ ul{
 
 button,input{
     cursor: pointer;
-}
-
-
-main{
-    align-items: center;
-}
-.mainContent{
-    display: flex;
-    align-items: center;
 }
