@@ -103,7 +103,6 @@ CREATE TABLE IF NOT EXISTS `Kantoor Compleet`.`categorie` (
   PRIMARY KEY (`idcategorie`))
 ENGINE = InnoDB;
 
-
 -- -----------------------------------------------------
 -- Table `Kantoor Compleet`.`categorieën-advertentie`
 -- -----------------------------------------------------
