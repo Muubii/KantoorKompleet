@@ -49,11 +49,13 @@ include 'php/checkSession.php';
 
     <main>
         <div class="advertentieBox">
+            <a href="advertentie.html">
         <div class="advertentie">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4LLbfgFyq6JUQ5eTnajtUW43m6Fn_7M4I_liEbwdNI1ZJqUmdwR8vuwc-X_M_lYpy5-A&usqp=CAU" alt="img" class="advertentieImg">
             <h4>#Advertentie</h4>
             <p>Dit is een advertentie</p>
         </div>
+    </a>
         <div class="advertentie">
             <img src="https://collectyourticket.com/uploads/0000/1/2023/03/28/img-world-activity-03.jpg" alt="img" class="advertentieImg">
             <h4>#Advertentie</h4>
