@@ -1,0 +1,47 @@
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: calc(100vh - 120px); */
+}
+
+.uploadAdvertentieBox{
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+
+.imgBox{
+    height: 100%;
+    width: 100%;
+    border: 2px dashed black;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.imgSlider{
+    display: grid;
+}
+
+.uploadImageIcon{
+    width: 70%;
+}
+
+
+.imgSlider{
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    width: 100%;
+}
+
+.uploadImgBox{
+    width: 400px;
+    height: 400px;
+}
+
+.imageSkeleton{
+    height: 50px;
+    width: 50px;
+    background-color: lightGray;
+
+}
