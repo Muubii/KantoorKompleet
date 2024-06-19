@@ -5,6 +5,15 @@ body {
   background-color: #f7f7f7;
 }
 
+@media screen and (max-width: 1050px){
+  .container {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 100px;
+    width: 100%;
+  }
+}
+
 .container {
   display: flex;
   justify-content: space-between;
