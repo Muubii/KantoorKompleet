@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/plaatsadvertentie.css">
+    <link rel="stylesheet" href="css/sorteblegrid.css">
     <script src="js/header.js"></script>
+    <script src="js/sorteblegrid.js"></script>
 </head>
 <body>
     <header>
@@ -37,40 +39,106 @@
             <div class="uploadImgBox">
                 <div class="imgBox">
                     <img src="images/icons/uploadImage.svg" class="uploadImageIcon">
-                    <label for="">upload afbeeldingen hier</label>
-                    <input type="file" id="uploadFile">
+                    <label for="uploadFile">upload afbeeldingen hier</label>
+                    <input type="file" id="uploadFile" multiple accept=".jpg,.png,.jpeg">
                 </div>
                 <div class="imgSlider">
-                    <div class="imageSkeleton">1</div>
-                    <div class="imageSkeleton">2</div>
-                    <div class="imageSkeleton">3</div>
-                    <div class="imageSkeleton">4</div>
-                    <div class="imageSkeleton">5</div>
+                    <div class="tile" style="order: 1;"><span class="noselect orderNumber">1</span></div>
+                    <div class="tile" style="order: 2;"><span class="noselect orderNumber">2</span></div>
+                    <div class="tile" style="order: 3;"><span class="noselect orderNumber">3</span></div>
+                    <div class="tile" style="order: 4;"><span class="noselect orderNumber">4</span></div>
+                    <div class="tile" style="order: 5;"><span class="noselect orderNumber">5</span></div>
+                    <div class="tile" style="order: 6;"><span class="noselect orderNumber">6</span></div>
+                    <div class="tile" style="order: 7;"><span class="noselect orderNumber">7</span></div>
+                    <div class="tile" style="order: 8;"><span class="noselect orderNumber">8</span></div>
+                    <div class="tile" style="order: 9;"><span class="noselect orderNumber">9</span></div>
+                    <div class="tile" style="order: 10;"><span class="noselect orderNumber">10</span></div>
+                    <div class="placeholder-tile" style="order: 10;"></div>
                 </div>
             </div>
 
-            <div>
-                <label for="naam">naam</label>
-                <input type="text" id="naam">
+            <!-- <div class="inputform">
 
-                <select name="" id="">
-                    <option value="">categorieën</option>
-                </select>
-
-                <label for="prijs">prijs</label>
-                <input type="text" id="prijs">
-
-                <label>bieden</label>
-                <input type="number">
-                
-                <label for="timeForDeletion">datum automatische verwijdering</label>
-                <input type="date" id="timeForDeletion">
-
-                <label for="beschrijfing">beschrijfing</label>
-                <textarea name="beschrijfing" placeholder="type hier uw beschrijfing" id="beschrijfing"></textarea>
-            </div>
+                <div class="inputbox">
+                    <label for="naam">Naam:</label>
+                    <input type="text" id="naam">
+                </div>
+                <div class="inputbox">
+                    <div class="TopOfBox">
+                        <label>Categorieën</label><img src="images/icons/arrow.svg" alt="icon" class="arrowIcon" onclick="bekijkCategorien()">
+                        <hr>
+                    </div>
+                    <div class="categoriënbox">
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                        <div>stoelen</div>
+                        <div>tafels</div>
+                        <div>computers</div>
+                    </div>
+                </div>
+                <div class="inputbox">
+                    <label for="prijs">Prijs:</label>
+                    <input type="text" id="prijs"><br>
+                    <label for="bieden">bieden vanaf:</label>
+                    <input type="text" id="bieden">
+                </div>
+                <div class="inputbox">
+                    <label>Bieden:</label>
+                    <input type="text">
+                </div>
+                <div class="inputbox">
+                    <label for="timeForDeletion">Automatische verwijdering:</label>
+                    <input type="date" id="timeForDeletion"><br>
+                </div>
+                <div class="inputbox">
+                    <label for="beschrijfing">Beschrijfing:</label><br>
+                    <textarea name="beschrijfing" placeholder="type hier uw beschrijfing" id="beschrijfing"></textarea>
+                </div>
+                <button type="submit">Plaats advertentie</button>
+            </div> -->
 
         </div>
     </main>
 </body>
+<script src="js/plaatsadvertentie.js"></script>
 </html>
