@@ -7,15 +7,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     $mypassword = $_POST['Wachtwoord'];
 
     // Gebruik voorbereidende verklaringen om SQL-injectie te voorkomen
-    $stmt = $conn->prepare("SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam = ? AND Wachtwoord = ?");
-    $stmt->bind_param("ss", $myusername, $mypassword);
+    $stmt = $conn->prepare("SELECT * FROM Gebruiker WHERE Gebruikersnaam = ? ");
+    $stmt->bind_param("s", $myusername);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    if ($stmt->num_rows == 1) {
-        $_SESSION['login_user'] = $myusername;
-        header("Location: /index.html");
-        exit();
+    //$stmt->store_result();
+
+        if($user && password_verify($mypassword,$user['Wachtwoord'])){
+            $_SESSION['login_user'] = $myusername;
+            header("Location: /index.html");
+            exit();
     } else {
         echo "Ongeldige gebruikersnaam of wachtwoord.";
     }

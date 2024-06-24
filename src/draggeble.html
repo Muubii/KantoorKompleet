@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Draggable Tiles with Placeholder</title>
+    <style>
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(5, 100px);
+            grid-template-rows: repeat(2, 100px);
+            gap: 5px;
+        }
+        .tile, .placeholder-tile {
+            width: 100px;
+            height: 100px;
+            background-color: lightblue;
+            cursor: grab;
+            user-select: none;
+        }
+        .tile.dragging {
+            background-color: rgba(70, 130, 180, 0.5);
+            position: absolute;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.8;
+        }
+        .placeholder-tile {
+            background-color: lightgray;
+            opacity: 0.3;
+            display: none;
+        }
+        img{
+            width: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <div class="tile" style="order: 0;">1<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 1;">2<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 2;">3<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 3;">4<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 4;">5<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 5;">6<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 6;">7<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 7;">8<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 8;">9<img src="images/logo.svg"></div>
+        <div class="tile" style="order: 9;">10<img src="images/logo.svg"></div>
+        <div class="placeholder-tile" style="order: 10;"></div>
+    </div>
+
+    <script>document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.querySelector('.grid');
+        const tiles = Array.from(document.querySelectorAll('.tile'));
+        const placeholder = document.querySelector('.placeholder-tile');
+        let draggedTile = null, offsetX = 0, offsetY = 0;
+    
+        const onMouseDown = (e) => {
+            e.preventDefault(); // Prevent default touch behavior (scrolling)
+            draggedTile = e.target.closest('.tile');
+            if (!draggedTile) return;
+            
+            if (e.type === 'touchstart') {
+                offsetX = e.touches[0].clientX - draggedTile.getBoundingClientRect().left;
+                offsetY = e.touches[0].clientY - draggedTile.getBoundingClientRect().top;
+            } else {
+                offsetX = e.clientX - draggedTile.getBoundingClientRect().left;
+                offsetY = e.clientY - draggedTile.getBoundingClientRect().top;
+            }
+            
+            draggedTile.classList.add('dragging');
+            placeholder.style.display = 'block';
+            placeholder.style.order = draggedTile.style.order;
+    
+            // Directly position the dragged tile under the cursor
+            if (e.type === 'touchstart') {
+                draggedTile.style.left = `${e.touches[0].clientX - offsetX}px`;
+                draggedTile.style.top = `${e.touches[0].clientY - offsetY}px`;
+            } else {
+                draggedTile.style.left = `${e.clientX - offsetX}px`;
+                draggedTile.style.top = `${e.clientY - offsetY}px`;
+            }
+    
+            document.addEventListener('mousemove', onMouseMove, { passive: false });
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('touchmove', onMouseMove, { passive: false });
+            document.addEventListener('touchend', onMouseUp);
+        };
+    
+        const onMouseMove = (e) => {
+            e.preventDefault(); // Prevent default touch behavior (scrolling)
+            if (draggedTile) {
+                if (e.type === 'touchmove') {
+                    draggedTile.style.left = `${e.touches[0].clientX - offsetX}px`;
+                    draggedTile.style.top = `${e.touches[0].clientY - offsetY}px`;
+                } else {
+                    draggedTile.style.left = `${e.clientX - offsetX}px`;
+                    draggedTile.style.top = `${e.clientY - offsetY}px`;
+                }
+    
+                const rect = draggedTile.getBoundingClientRect(), centerX = rect.left + rect.width / 2, centerY = rect.top + rect.height / 2;
+                let newOrder = null;
+    
+                tiles.forEach(tile => {
+                    if (tile !== draggedTile) {
+                        const tileRect = tile.getBoundingClientRect();
+                        if (centerX > tileRect.left && centerX < tileRect.right && centerY > tileRect.top && centerY < tileRect.bottom) {
+                            newOrder = tile.style.order;
+                        }
+                    }
+                });
+    
+                if (newOrder !== null && newOrder !== placeholder.style.order) {
+                    const oldOrder = placeholder.style.order;
+                    placeholder.style.order = newOrder;
+    
+                    tiles.forEach(tile => {
+                        if (tile !== draggedTile) {
+                            const tileOrder = parseInt(tile.style.order);
+                            if (tileOrder >= newOrder && tileOrder < oldOrder) {
+                                tile.style.order = tileOrder + 1;
+                            } else if (tileOrder <= newOrder && tileOrder > oldOrder) {
+                                tile.style.order = tileOrder - 1;
+                            }
+                        }
+                    });
+                }
+            }
+        };
+    
+        const onMouseUp = () => {
+            if (draggedTile) {
+                draggedTile.classList.remove('dragging');
+                draggedTile.style.left = '';
+                draggedTile.style.top = '';
+                draggedTile.style.order = placeholder.style.order;
+                draggedTile = null;
+                placeholder.style.display = 'none';
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.removeEventListener('touchmove', onMouseMove);
+                document.removeEventListener('touchend', onMouseUp);
+            }
+        };
+    
+        tiles.forEach(tile => {
+            tile.addEventListener('mousedown', onMouseDown);
+            tile.addEventListener('touchstart', onMouseDown, { passive: false });
+        });
+    });
+    </script>
+</body>
+</html>

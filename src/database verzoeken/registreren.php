@@ -10,11 +10,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     $mypassword = $_POST['Wachtwoord'];
     
 
+    $hashedpassword = password_hash($mypassword, PASSWORD_DEFAULT);
     // Prepare SQL statement
     $stmt = $conn->prepare("INSERT INTO Gebruiker (Naam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
 
     // Bind parameters to the SQL statement
-    $stmt->bind_param("sss", $myname, $myusername, $mypassword);
+    $stmt->bind_param("sss", $myname, $myusername, $hashedpassword);
 
     // Execute the SQL statement
     if ($stmt->execute()) {

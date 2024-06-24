@@ -1,0 +1,36 @@
+.tile, .placeholder-tile {
+    user-select: none;
+}
+.tile.dragging {
+    height: 76px;
+    width: 76px;
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.8;
+    cursor: grabbing;
+}
+
+@media screen and (max-width: 450px){
+    .tile.dragging {
+        height: 66px;
+        width: 66px;
+    }
+}
+
+.placeholder-tile {
+    background-color: lightgray;
+    opacity: 0.3;
+    display: none;
+}
+
+.tile img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}

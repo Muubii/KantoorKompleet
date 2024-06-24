@@ -22,7 +22,7 @@ header{
 .headerContent{
     display: grid;
     grid-template-columns: auto auto;
-    height: 200px;
+    height: max-content;
 }
 
 .logoBox{
@@ -32,11 +32,12 @@ header{
     align-items: center;
     height: min-content;
     width: max-content;
-    cursor: pointer;
 }
 
 .logo{
     height: 100px;
+    cursor: pointer;
+    
 }
 .logoTekst{
     color: transparent;
@@ -66,15 +67,15 @@ header{
 }
 
 .user_acc{
-    min-height: 70px;
-    min-width: 70px;
-    max-width: 70px;
+    height: 70px;
+    width: 70px;
     background-color: white;
     border-radius: 100px;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
-    transition: 1s;
+    transition: .5s;
+    z-index: 9;
 }
 
 .listUserOptions:last-child{
@@ -93,6 +94,7 @@ ul{
 }
 .open{
     height: 200px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .usericonbox{
@@ -111,6 +113,6 @@ ul{
     justify-content: center;
 }
 
-button,input{
+button{
     cursor: pointer;
 }
