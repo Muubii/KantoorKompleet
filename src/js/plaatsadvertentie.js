@@ -85,3 +85,35 @@ function PlaceImagesFromArrayInTile() {
         }
     }
 }
+
+const categorieënBox = document.querySelector(".categoriënbox");
+const arrow = document.querySelector(".arrowIcon");
+let boxisopen = false;
+function bekijkCategorien(){
+    arrow.parentNode.onclick = function(){
+        if (boxisopen){
+            boxisopen = false
+            categorieënBox.classList.add("categoriënboxopen");
+            arrow.classList.add("animation")
+        } else{
+            boxisopen = true;
+            categorieënBox.classList.remove("categoriënboxopen");
+            arrow.classList.remove("animation")
+        }
+    }
+}
+SelectCategorieën();
+function SelectCategorieën(){
+    let alleCategorieën = Array.from(categorieënBox.children);
+    let allecategorieënBox = document.querySelector(".categoriënbox");
+    let selectedCategorienBox = document.querySelector(".selectedCategorieën");
+    alleCategorieën.forEach(categorie => {
+        categorie.onclick = function(){
+            if(categorie.parentElement == allecategorieënBox){
+                selectedCategorienBox.appendChild(categorie)
+            } else{
+                allecategorieënBox.appendChild(categorie)
+            }
+        }
+    });    
+}

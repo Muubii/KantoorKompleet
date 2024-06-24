@@ -10,6 +10,14 @@
     opacity: 0.8;
     cursor: grabbing;
 }
+
+@media screen and (max-width: 450px){
+    .tile.dragging {
+        height: 66px;
+        width: 66px;
+    }
+}
+
 .placeholder-tile {
     background-color: lightgray;
     opacity: 0.3;
