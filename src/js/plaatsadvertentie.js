@@ -2,17 +2,18 @@
 const imageInput = document.getElementById("uploadFile");
 let images = [];
 const tiles = document.querySelectorAll(".tile");
-
+let AllFiles = [];
 imageInput.addEventListener("change", (event) => {
     const files = event.target.files;
-
     for (const file of files) {
+        AllFiles.push(file);
         const reader = new FileReader();
 
         reader.onload = (e) => {
             const img = document.createElement("img");
             img.classList.add("advertentieImg");
             img.src = e.target.result;
+            img.filename = file.name;
             images.push(img);
 
             // Place images in tiles and update tilesWithImages
@@ -117,3 +118,44 @@ function SelectCategorieën(){
         }
     });    
 }
+
+
+
+//-------------------------------------------------------------------------------------------------
+//plaats advertentie in database. -
+const advertentieform = document.getElementById("advertentiegegevens");
+const submitAdvertentieform = document.getElementById("submitBtn");
+
+advertentieform.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const files = Array.from(AllFiles.slice(0, 10));
+
+
+    if (files.length < 1) {
+        alert("Upload minstens 1 afbeelding");
+        return;
+    }
+
+    files.forEach((file, index) => {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            const fileContent = event.target.result;
+            formData.append(`Image${index}`, new Blob([fileContent], { type: file.type }), file.name);
+
+
+            if((index) === files.length - 1){
+                const xhr = new XMLHttpRequest();
+                xhr.onload = function() {
+                    console.log(xhr.responseText);
+                };
+                
+                xhr.open("POST", "database verzoeken/plaatsadvertentie.php", true);
+                xhr.send(formData);
+            }
+        };
+        reader.readAsArrayBuffer(file);
+    });
+});
+
+
