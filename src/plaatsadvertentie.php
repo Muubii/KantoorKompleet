@@ -1,3 +1,7 @@
+<?php
+    require "php/checkSession.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
     <header>
         <div class="headerContent">
             <div class="logoBox">
-                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='index.html'">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
                 <p class="logoTekst">Kantoor Compleet</p>
             </div>
             <nav class="headerNav">
@@ -25,8 +29,8 @@
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
                     <div class="usermenubox">
                         <ul class="listUserOptions">
-                            <li class="useroption">Profiel</li>
-                            <li class="useroption">Uitloggen</li>
+                            <li class="useroption profiel">Profiel</li>
+                            <li class="useroption uitloggen">Uitloggen</li>
                         </ul>
                     </div>
                 </div>
