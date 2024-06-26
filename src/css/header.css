@@ -67,16 +67,15 @@ header{
 }
 
 .user_acc{
-    min-height: 70px;
-    min-width: 70px;
-    max-width: 70px;
+    height: 70px;
+    width: 70px;
     background-color: white;
     border-radius: 100px;
     text-align: center;
     overflow: hidden;
     cursor: pointer;
     transition: .5s;
-    z-index: 2;
+    z-index: 9;
 }
 
 .listUserOptions:last-child{
@@ -114,6 +113,6 @@ ul{
     justify-content: center;
 }
 
-button,input{
+button{
     cursor: pointer;
 }

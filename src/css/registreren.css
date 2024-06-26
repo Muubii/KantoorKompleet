@@ -1,27 +1,15 @@
-.navbar {
-    background-color: #79899afa;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
-
-#s{
-    padding: 1%;
-}
-
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f0f0f0;
+    height: 100vh;
+    display: grid;
+    grid-template-rows: min-content auto;
+}
+.mainPageContent{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
 }
-
 .login-container {
     width: 100%;
     max-width: 400px;

@@ -4,40 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/registreren.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Registreren</title>
 </head>
 <body>
-    <nav class="navbar">
-        <ul>
-            <a href="index.html" id="s">Home</a>
-            <a href="login.html" id="s">Login</a>
-            <a href="chat.html" id="s">Chat</a>
-        </ul>
-    </nav>
-
-<div class="login-container">
-    <form class="registration-form" action="database verzoeken/registreren.php" method="POST">
-        <h1>Registreren</h1>
-
-        <div class="form-field">
-            <label for="Naam">Naam:</label>
-            <input type="text" id="Naam" name="Naam" placeholder="Voer je naam in" required>
+    <header>
+        <div class="headerContent">
+            <div class="logoBox">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo">
+                <p class="logoTekst">Kantoor Compleet</p>
+            </div>
         </div>
+    </header>
+    <main class="mainPageContent">
+        <div class="login-container">
+            <form class="registration-form" action="database verzoeken/registreren.php" method="POST">
+                <h1>Registreren</h1>
 
-        <div class="form-field">
-            <label for="Gebruikersnaam">Gebruikersnaam:</label>
-            <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer je gebruikersnaam in" required>
+                <div class="form-field">
+                    <label for="Naam">Bedrijfsnaam:</label>
+                    <input type="text" id="Naam" name="Bedrijfsnaam" placeholder="Voer hier uw bedrijfsnaam naam in" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="Gebruikersnaam">Gebruikersnaam:</label>
+                    <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer hier uw gebruikersnaam in" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="Wachtwoord">Wachtwoord:</label>
+                    <input type="password" id="Wachtwoord" name="Wachtwoord" placeholder="Voer hier uw wachtwoord in" required>
+                    <a href="login.html">login</a>
+                </div>
+
+                <button type="submit" name="register">Register</button>
+            </form>
         </div>
-        
-        <div class="form-field">
-            <label for="Wachtwoord">Wachtwoord:</label>
-            <input type="Wachtwoord" id="Wachtwoord" name="Wachtwoord" placeholder="Voer je wachtwoord in" required>
-            <a href="login.html">login</a>
-        </div>
-
-        <button type="submit" name="register">Register</button>
-    </form>
-</div>
-
+    </main>
 </body>
 </html>

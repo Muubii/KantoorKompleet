@@ -3,23 +3,24 @@ session_start();
 include "ConnDb.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
-    $myusername = $_POST['Gebruikersnaam'];
+    $Bedrijfsnaam = $_POST['Bedrijfsnaam'];
     $mypassword = $_POST['Wachtwoord'];
 
     // Gebruik voorbereidende verklaringen om SQL-injectie te voorkomen
-    $stmt = $conn->prepare("SELECT Gebruikersnaam FROM Gebruiker WHERE Gebruikersnaam = ? AND Wachtwoord = ?");
-    $stmt->bind_param("ss", $myusername, $mypassword);
+    $stmt = $conn->prepare("SELECT * FROM Gebruiker WHERE Bedrijfsnaam = ? ");
+    $stmt->bind_param("s", $Bedrijfsnaam);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-    if ($stmt->num_rows == 1) {
-        $_SESSION['login_user'] = $myusername;
-        header("Location: /index.html");
-        exit();
+        if($user && password_verify($mypassword,$user['Wachtwoord'])){
+            $_SESSION['Bedrijfsnaam'] = $Bedrijfsnaam;
+            header("Location: /index.php");
+            exit();
     } else {
         echo "Ongeldige gebruikersnaam of wachtwoord.";
     }
-
+ 
     $stmt->close();
     $conn->close();
 }

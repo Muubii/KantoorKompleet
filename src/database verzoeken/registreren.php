@@ -5,23 +5,31 @@
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
-    $myname = $_POST['Naam'];
-    $myusername = $_POST['Gebruikersnaam'];
+    $Bedrijfsnaam = $_POST['Bedrijfsnaam'];
+    $myname = $_POST['Gebruikersnaam'];
     $mypassword = $_POST['Wachtwoord'];
     
-
+    $hashedpassword = password_hash($mypassword, PASSWORD_DEFAULT);
     // Prepare SQL statement
-    $stmt = $conn->prepare("INSERT INTO Gebruiker (Naam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
+    $stmt1 = $conn->prepare("SELECT (Bedrijfsnaam) FROM Gebruiker WHERE Bedrijfsnaam = ?");
+    $stmt1->bind_param("s", $Bedrijfsnaam);
 
-    // Bind parameters to the SQL statement
-    $stmt->bind_param("sss", $myname, $myusername, $mypassword);
+    $stmt1->execute();
+    $result = $stmt1->get_result();
+    if($result->num_rows == 0){
+        $stmt2 = $conn->prepare("INSERT INTO Gebruiker (Bedrijfsnaam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
+        // Bind parameters to the SQL statement
+        $stmt2->bind_param("sss", $Bedrijfsnaam, $myname, $hashedpassword);
 
-    // Execute the SQL statement
-    if ($stmt->execute()) {
-        header("location: /login.html");
-        exit();
-    } else {
-        echo "Error: " . $stmt->error;
+        // Execute the SQL statement
+        if ($stmt2->execute()) {
+            header("location: /login.html");
+            exit();
+        } else {
+            echo "Error: " . $stmt->error;
+        }
+    }else{
+        echo "Bedrijfsnaam is al in bezet";
     }
 }
 ?>
