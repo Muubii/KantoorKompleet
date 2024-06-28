@@ -17,6 +17,21 @@ document.addEventListener("DOMContentLoaded", (event) =>{
             profilebox.classList.remove("open");
         }
     }
+    const profielOption = document.querySelector(".profiel");
+    profielOption.onclick = function() {
+        if(location.pathname != '/profiel.html'){
+            location.href = "/profiel.html";
+        }
+    }
+    const uitlogOption = document.querySelector(".uitloggen");
+    uitlogOption.onclick = function() {
+
+        xhr = new XMLHttpRequest()
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+            location.href = "/login.html";
+        }
+        xhr.open("POST", "php/deleteSessions.php");
+        xhr.send();
+    }
 })
-
-

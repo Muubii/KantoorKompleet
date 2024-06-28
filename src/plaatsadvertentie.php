@@ -1,3 +1,7 @@
+<?php
+    require "php/checkSession.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,7 +19,7 @@
     <header>
         <div class="headerContent">
             <div class="logoBox">
-                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='index.html'">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
                 <p class="logoTekst">Kantoor Compleet</p>
             </div>
             <nav class="headerNav">
@@ -25,8 +29,8 @@
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
                     <div class="usermenubox">
                         <ul class="listUserOptions">
-                            <li class="useroption">Profiel</li>
-                            <li class="useroption">Uitloggen</li>
+                            <li class="useroption profiel">Profiel</li>
+                            <li class="useroption uitloggen">Uitloggen</li>
                         </ul>
                     </div>
                 </div>
@@ -57,66 +61,52 @@
                 </div>
             </div>
 
-            <div class="inputform">
+            <form id="advertentiegegevens">
+                <div class="inputform">
+                    <div class="inputbox">
+                        <span class="verplicht">(verplicht)</span>
+                        <label>Naam:</label>
+                        <input type="text" name="naam" required placeholder="Naam">
+                    </div>
+                    <div class="inputbox categorieënInput">
+                        <span class="verplicht">(verplicht)</span>
+                        <div class="TopOfBox">
+                            <label for="categorieënbox">Categorieën<img src="images/icons/arrow.svg" alt="icon" class="arrowIcon" onclick="bekijkCategorien()"></label>
+                            <hr>
+                            <div class="selectedCategorieën"></div>
+                        </div>
+                        <div class="categoriënbox" id = "categorieënbox"></div>
+                    </div>
+                    <div class="inputbox prijsbox">
+                        <span class="verplicht">(verplicht)</span>
 
-                <div class="inputbox">
-                    <span class="verplicht">(verplicht)</span>
-                    <label for="naam">Naam:</label>
-                    
-                    <input type="text" id="naam">
-                </div>
-                <div class="inputbox categorieënInput">
-                    <span class="verplicht">(verplicht)</span>
-                    <div class="TopOfBox">
-                        <label>Categorieën<img src="images/icons/arrow.svg" alt="icon" class="arrowIcon" onclick="bekijkCategorien()"></label>
-                        <hr>
-                        <div class="selectedCategorieën"></div>
-                    </div>
-                    <div class="categoriënbox">
-                        <div>Meubilair</div>
-                        <div>Computers en Randapparatuur</div>
-                        <div>Printers en Scanners</div>
-                        <div>Telefoon- en Communicatiesystemen</div>
-                        <div>Koffiemachines</div>
-                        <div>Archiefkasten</div>
-                        <div>Vergadertafels en Stoelen</div>
-                        <div>Projectoren en Presentatieschermen</div>
-                        <div>Veiligheidsapparatuur</div>
-                        <div>Decoratie en Kunst</div>
-                        <div>Opbergrekken en Ladekasten</div>
-                        <div>Keukenapparatuur</div>
-                        <div>Stoelen en Bureaustoelen</div>
-                        <div>Reinigingsapparatuur</div>
-                        <div>Verlichting</div>
-                        <div>Werkplekaccessoires</div>
-                    </div>
-                </div>
-                <div class="inputbox prijsbox">
-                    <span class="verplicht">(verplicht)</span>
-                    <label for="prijs">Prijs:</label>
-                    <div>
-                        <input type="text" id="prijs" placeholder="0,00">
-                        <span>€</span>
-                    </div>
-                    <label for="bieden">Bieden vanaf:</label>
-                    <div>
-                        <input type="text" id="bieden" placeholder="0,00">
-                        <span>€</span>
-                    </div>
-                    
-                </div>
-                <div class="inputbox">
-                    <label for="timeForDeletion">Automatische verwijdering:</label>
-                    <input type="date" id="timeForDeletion">
-                </div>
-                <div class="inputbox beschrijfingsbox">
-                    <span class="verplicht">(verplicht)</span>
-                    <label for="beschrijfing">Beschrijfing:</label>
-                    <textarea name="beschrijfing" placeholder="Een korte beschrijfing over het product" id="beschrijfing"></textarea>
-                </div>
-                <button type="submit">Plaats advertentie</button>
-            </div>
+                        <label for="prijs">Prijs:</label>
+                        <div>
+                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required>
+                            <span>€</span>
+                        </div>
 
+                        <label for="bieden">Bieden vanaf:</label>
+                        <div>
+                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required>
+                            <span>€</span>
+                        </div>
+                        
+                    </div>
+                    <div class="inputbox">
+                        <label for="timeForDeletion">Automatische verwijdering:</label>
+                        <input type="date" id="timeForDeletion" name="automatische verwijdering">
+                    </div>
+
+                    <div class="inputbox beschrijfingsbox">
+                        <span class="verplicht">(verplicht)</span>
+                        <label for="Beschrijving">Beschrijving:</label>
+                        <textarea name="beschrijving" placeholder="Een korte beschrijfing over het product" id="beschrijving" required></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn">Plaats advertentie</button>
+                </div>
+            </form>
         </div>
     </main>
 </body>
