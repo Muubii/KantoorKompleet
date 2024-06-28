@@ -1,6 +1,6 @@
 <?php
     session_start();
-    include "ConnDb.php";
+    require "ConnDb.php";
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
@@ -11,13 +11,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
     
     $hashedpassword = password_hash($mypassword, PASSWORD_DEFAULT);
     // Prepare SQL statement
-    $stmt1 = $conn->prepare("SELECT (Bedrijfsnaam) FROM Gebruiker WHERE Bedrijfsnaam = ?");
+    $stmt1 = $conn->prepare("SELECT (Bedrijfsnaam) FROM gebruiker WHERE Bedrijfsnaam = ?");
     $stmt1->bind_param("s", $Bedrijfsnaam);
 
     $stmt1->execute();
     $result = $stmt1->get_result();
     if($result->num_rows == 0){
-        $stmt2 = $conn->prepare("INSERT INTO Gebruiker (Bedrijfsnaam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
+        $stmt2 = $conn->prepare("INSERT INTO gebruiker (Bedrijfsnaam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
         // Bind parameters to the SQL statement
         $stmt2->bind_param("sss", $Bedrijfsnaam, $myname, $hashedpassword);
 

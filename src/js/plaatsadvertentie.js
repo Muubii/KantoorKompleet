@@ -1,12 +1,21 @@
 // Upload the images -------------------------------------------------------------
+
 const imageInput = document.getElementById("uploadFile");
 let images = [];
 const tiles = document.querySelectorAll(".tile");
 let AllFiles = [];
 imageInput.addEventListener("change", (event) => {
     const files = event.target.files;
-    for (const file of files) {
+    for (const file of files) {    
+    if(file){
+        const allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+        if (!allowedExtensions.exec(file.name)) {
+            alert('Alleen bestanden van .jpeg/.jpg/.png toegestaan.');
+            return false;
+        }
+    }
         AllFiles.push(file);
+        AllFiles = AllFiles.slice(0, 10);
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -54,7 +63,14 @@ function DeleteImageFromTile() {
                 deleteBtn.onclick = deleteBtn.ontouchstart = function() {
                     deleteBtn.remove();
                     gradient.remove();
-                    images.splice(images.indexOf(image), 1);
+                    let index = images.indexOf(image);
+                    console.log(index);
+                    for(let i = 0; i < AllFiles.length; i++){
+                        if(images[index].filename === AllFiles[i].name){
+                            AllFiles.splice(i, 1);
+                        }
+                    }
+                    images.splice(index, 1);
                     image.remove();
                     PlaceImagesFromArrayInTile();
                 };
@@ -103,11 +119,26 @@ function bekijkCategorien(){
         }
     }
 }
-SelectCategorieën();
+categorieënFromDatabase();
+function categorieënFromDatabase(){
+xhr = new XMLHttpRequest()
+xhr.onload = function(){
+    document.getElementById("categorieënbox").innerHTML = xhr.responseText;
+    SelectCategorieën();
+}
+
+xhr.open('POST', 'database verzoeken/selectCategorieën.php', true);
+xhr.send();
+
+}
+
+
 function SelectCategorieën(){
-    let alleCategorieën = Array.from(categorieënBox.children);
+    let alleCategorieën = [...document.querySelector(".categoriënbox").children];
     let allecategorieënBox = document.querySelector(".categoriënbox");
     let selectedCategorienBox = document.querySelector(".selectedCategorieën");
+
+
     alleCategorieën.forEach(categorie => {
         categorie.onclick = function(){
             if(categorie.parentElement == allecategorieënBox){
@@ -121,6 +152,7 @@ function SelectCategorieën(){
 
 
 
+
 //-------------------------------------------------------------------------------------------------
 //plaats advertentie in database. -
 const advertentieform = document.getElementById("advertentiegegevens");
@@ -130,21 +162,32 @@ advertentieform.addEventListener("submit", function(event) {
     event.preventDefault();
     const formData = new FormData(event.target);
     const files = Array.from(AllFiles.slice(0, 10));
+    orderArr = {};
 
 
     if (files.length < 1) {
         alert("Upload minstens 1 afbeelding");
         return;
     }
+    let iterations = images.length >= 10 ? 10 : images.length;
+    for(let i = 0;  i < iterations; i++){
+        for(let j = 0; j < AllFiles.length; j++){
+            if(images[i].filename == AllFiles[j].name){
+                orderArr[AllFiles[j].name] = window.getComputedStyle(images[i].parentNode).order;
+            }
+        }
+    }
 
+    let selectedCategorieën = Array.from(document.querySelector(".selectedCategorieën").querySelectorAll("div")).map(element => element.getAttribute('categorieid'));
     files.forEach((file, index) => {
         const reader = new FileReader();
         reader.onload = function(event) {
             const fileContent = event.target.result;
             formData.append(`Image${index}`, new Blob([fileContent], { type: file.type }), file.name);
-
-
             if((index) === files.length - 1){
+
+                formData.append('categorieën', JSON.stringify(selectedCategorieën));
+                formData.append('order', JSON.stringify(orderArr));
                 const xhr = new XMLHttpRequest();
                 xhr.onload = function() {
                     console.log(xhr.responseText);
