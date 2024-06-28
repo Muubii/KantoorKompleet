@@ -25,6 +25,13 @@ document.addEventListener("DOMContentLoaded", (event) =>{
     }
     const uitlogOption = document.querySelector(".uitloggen");
     uitlogOption.onclick = function() {
-        location.href = "/login.html";
+
+        xhr = new XMLHttpRequest()
+        xhr.onload = function(){
+            console.log(xhr.responseText)
+            location.href = "/login.html";
+        }
+        xhr.open("POST", "php/deleteSessions.php");
+        xhr.send();
     }
 })
