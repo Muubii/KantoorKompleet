@@ -14,7 +14,7 @@ $stmt->bind_param('ii', $idadvertentie, $bieder);
 if (!$stmt->execute()) {
     echo "Error in insertion: " . $stmt->error;
 } else {
-    echo "New chat created with ID: " . $stmt->insert_id;  // Return the last inserted ID
+    echo $stmt->insert_id;  // Return the last inserted ID
 }
 
 $stmt->close();

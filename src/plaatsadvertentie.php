@@ -14,30 +14,30 @@
     <link rel="stylesheet" href="css/sorteblegrid.css">
     <script src="js/header.js"></script>
     <script src="js/sorteblegrid.js"></script>
+    <script src="js/geldinput.js"></script>
 </head>
 <body>
-    <header>
-        <div class="headerContent">
-            <div class="logoBox">
-                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
-                <p class="logoTekst">Kantoor Compleet</p>
-            </div>
-            <nav class="headerNav">
-                <button id="chatbtn" onclick="location.href='chat.html'"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
-                <button id="plaatsaddbtn" onclick="location.href='plaatsadvertentie.html'"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
-                <div class="user_acc">
-                    <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
-                    <div class="usermenubox">
-                        <ul class="listUserOptions">
-                            <li class="useroption profiel">Profiel</li>
-                            <li class="useroption uitloggen">Uitloggen</li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+<header>
+    <div class="headerContent">
+        <div class="logoBox">
+            <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
+            <p class="logoTekst">Kantoor Compleet</p>
         </div>
-    </header>
-    <main>
+        <nav class="headerNav">
+            <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
+            <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
+            <div class="user_acc">
+                <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
+                <div class="usermenubox">
+                    <ul class="listUserOptions">
+                        <li class="useroption profiel">Profiel</li>
+                        <li class="useroption uitloggen">Uitloggen</li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
         <div class="uploadAdvertentieBox">
 
             <div class="uploadImgBox">
@@ -82,13 +82,13 @@
 
                         <label for="prijs">Prijs:</label>
                         <div>
-                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required>
+                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput">
                             <span>€</span>
                         </div>
 
                         <label for="bieden">Bieden vanaf:</label>
                         <div>
-                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required>
+                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required class="geldInput">
                             <span>€</span>
                         </div>
                         
