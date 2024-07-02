@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", (event) =>{
     }
     const profielOption = document.querySelector(".profiel");
     profielOption.onclick = function() {
-        if(location.pathname != '/profiel.html'){
-            location.href = "/profiel.html";
+        if(location.pathname != '/profiel.php'){
+            location.href = "/profiel.php";
         }
     }
     const uitlogOption = document.querySelector(".uitloggen");
@@ -34,4 +34,13 @@ document.addEventListener("DOMContentLoaded", (event) =>{
         xhr.open("POST", "php/deleteSessions.php");
         xhr.send();
     }
+    const chatBtn = document.querySelector("#chatbtn");
+    chatBtn.onclick = function(){
+        window.location.href = "/chat.html";
+    }
+    const plaatsaddbtn = document.querySelector("#plaatsaddbtn");
+    plaatsaddbtn.onclick = function(){
+        window.location.href = "/plaatsadvertentie.php";
+    }
+
 })

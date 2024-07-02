@@ -19,45 +19,59 @@ body {
   justify-content: space-between;
   padding: 100px;
 }
+
+#main-image{
+  max-height: 300px;
+  min-height: 300px;
+  width: auto;
+}
 .product-details {
   flex: 3;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #e5e5e5;
 }
+
 .product-details h1 {
   font-size: 24px;
   margin-bottom: 10px;
 }
+
 .product-details p {
   font-size: 16px;
   margin-bottom: 20px;
 }
+
 .product-details .price {
   font-size: 24px;
   color: #494f55;
   margin-bottom: 20px;
 }
+
 .product-details .shipping {
   font-size: 16px;
   margin-bottom: 20px;
 }
+
 .product-images {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
 }
+
 .product-images img {
   width: 100%;
   max-width: 400px;
   height: auto;
 }
+
 .thumbnails {
   display: flex;
   justify-content: center;
   margin-top: 10px;
 }
+
 .thumbnails img {
   width: 50px;
   height: 50px;
@@ -65,22 +79,27 @@ body {
   cursor: pointer;
   border: 1px solid #e5e5e5;
 }
+
 .sidebar {
   flex: 1;
   background-color: #fff;
   padding: 20px;
   border: 1px solid #e5e5e5;
 }
+
 .sidebar .seller-info {
   margin-bottom: 20px;
 }
+
 .sidebar .seller-info h3 {
   font-size: 20px;
   margin-bottom: 10px;
 }
+
 .sidebar .seller-info p {
   font-size: 16px;
 }
+
 .sidebar .contact-seller {
   background-color: #494f55;
   color: white;
@@ -89,15 +108,18 @@ body {
   cursor: pointer;
   border: none;
 }
+
 .sidebar .bid-section {
   margin-top: 20px;
 }
+
 .sidebar .bid-section input {
   width: 90%;
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #e5e5e5;
 }
+
 .sidebar .bid-section button {
   width: 100%;
   padding: 10px;
@@ -106,6 +128,7 @@ body {
   border: none;
   cursor: pointer;
 }
+
 .features {
   display: flex;
   flex-wrap: wrap;
@@ -114,10 +137,19 @@ body {
   border: 1px solid #e5e5e5;
   margin-top: 20px;
 }
+#logoVerkooper{
+  height: 50px;
+}
+.biedingBedrijfIcons{
+  height: 30px;
+  width: 30px;
+  border-radius: 100%;
+}
 .features div {
   flex: 1 1 50%;
   padding: 10px;
 }
+
 .features div span {
   font-weight: bold;
 }

@@ -2,6 +2,10 @@
 header{
     padding: 10px;
     background-color: rgb(140, 140, 140);
+    z-index: 999;
+    position: relative;
+    top: 0;
+    width: 100vw;
     
 }
 @media screen and (max-width: 950px) {
@@ -75,7 +79,7 @@ header{
     overflow: hidden;
     cursor: pointer;
     transition: .5s;
-    z-index: 9;
+    z-index: 999;
 }
 
 .listUserOptions:last-child{
