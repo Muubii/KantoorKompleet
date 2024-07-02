@@ -2,57 +2,47 @@ document.getElementById('menu__toggle').addEventListener('change', function() {
     document.querySelector('.container').classList.toggle('menu-open', this.checked);
 });
 
-function sendMessage(chatId, isVerkoper, bericht) {
-    if (!bericht) return;
-    $('#chatBox').append(`<div class="chat-bubble">${bericht}</div>`); // Append user's message as a chat bubble
+let idchat = 1;
+let isverkooper = 1;
 
-    $.ajax({
-        url: 'send.php',
-        type: 'POST',
-        data: {
-            chat_id: chatId,
-            isverkoper: isVerkoper,
-            bericht: bericht
-        },
-        success: function(response) {
-            console.log(response);
-            loadMessages(chatId); // Reload messages after sending
+function ophalenMessages() {
+    let xhr = new XMLHttpRequest();
+    xhr.open('GET', `database verzoeken/get_message.php?idchat=${idchat}`, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("chatBox").innerHTML = xhr.responseText;
+        } else if (xhr.readyState === 4) {
+            console.error('Error messages:', xhr.status, xhr.statusText);
         }
-    });
+    };
+    xhr.send();
 }
 
-function loadMessages(chatId) {
-    $.ajax({
-        url: 'ophalen.php',
-        type: 'POST',
-        data: { chat_id: chatId },
-        success: function(response) {
-            let messages = JSON.parse(response);
-            let messageContainer = $('#chatBox');
-            messageContainer.html('');
-            messages.forEach(function(message) {
-                let messageClass = message.isverkoper ? 'chat-bubble2' : 'chat-bubble';
-                messageContainer.append(`<div class="${messageClass}">${message.Gebruikersnaam}: ${message.bericht}</div>`);
-            });
+function sendMessage() {
+    let message = document.getElementById("message").value;
+    if (message.trim() === '') return;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'database verzoeken/send_message.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {   
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            document.getElementById("message").value = '';
+            ophalenMessages();
+        } else if (xhr.readyState === 4) {
+            console.error('Error sending message:', xhr.status, xhr.statusText);
         }
-    });
+    };
+    let data = `idchat=${idchat}&isverkooper=${isverkooper}&bericht=${encodeURIComponent(message)}`;
+    xhr.send(data);
 }
 
-$(document).ready(function() {
-    let chatId = 1; // Assume chat ID 1 for this example
-    loadMessages(chatId); // Load messages for chat with ID 1
+setInterval(ophalenMessages, 1000); // refresh messages every second
+ophalenMessages(); // Initial refresh
 
-    $('#send-btn').on('click', function() {
-        let bericht = $('#message').val().trim();
-        sendMessage(chatId, 0, bericht); // Assume isVerkoper = 0 for the user
-        $('#message').val(''); // Clear input field after sending
-    });
-
-    $('#message').on('keypress', function(e) {
-        if (e.which === 13) { // Enter key pressed
-            let bericht = $(this).val().trim();
-            sendMessage(chatId, 0, bericht); // Assume isVerkoper = 0 for the user
-            $(this).val(''); // Clear input field after sending
-        }
-    });
+document.getElementById("send-btn").addEventListener("click", sendMessage);
+document.getElementById("message").addEventListener("keypress", function(event) {
+    if (event.key === "Enter") {
+        sendMessage();
+    }
 });

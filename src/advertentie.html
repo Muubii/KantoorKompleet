@@ -34,7 +34,7 @@
     </header>
     <div class="container">
         <div class="product-details">
-            <h1>Gaiming chair</h1>
+            <h1>Gaming chair</h1>
             <div class="product-images">
                 <img id="main-image" src="https://via.placeholder.com/400" alt="Product Image">
                 <div class="thumbnails">
@@ -50,7 +50,7 @@
             <div class="features">
                 <div><span>Conditie:</span> Nieuw</div>
                 <div><span>Merk:</span> Wrox</div>
-                <div><span>Informatie:</span> Hij is een beetje gebruikt verdein in neiuwe conditie.</div>
+                <div><span>Informatie:</span> Hij is een beetje gebruikt verder in nieuwe conditie.</div>
             </div>
         </div>
         <div class="sidebar">
@@ -61,8 +61,11 @@
                 <p>Status: Online</p>
             </div>
 
-            <!-- manier vinden hoe je naar de persoon instantly gaat in php om chatten -->
-            <a href="chat.html"><button class="contact-seller">Bericht</button></a>
+            <form id="contactForm">
+                <input type="hidden" id="idadvertentie" value="1"> 
+                <input type="hidden" id="bieder" value="0"> 
+                <button type="button" class="contact-seller" onclick="createChat()">Bericht</button>
+            </form>
             <div class="bid-section">
                 <h3>Bieden</h3>
                 <input type="number" placeholder="€">
