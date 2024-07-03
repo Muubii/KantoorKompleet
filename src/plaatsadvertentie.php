@@ -82,13 +82,13 @@
 
                         <label for="prijs">Prijs:</label>
                         <div>
-                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput">
+                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput" max = "6">
                             <span>€</span>
                         </div>
 
                         <label for="bieden">Bieden vanaf:</label>
                         <div>
-                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required class="geldInput">
+                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required class="geldInput" max="6">
                             <span>€</span>
                         </div>
                         

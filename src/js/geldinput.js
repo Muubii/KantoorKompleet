@@ -1,24 +1,67 @@
 document.addEventListener("DOMContentLoaded", function(event) {
-    const invoervelden = document.querySelectorAll('.geldinput');
+    const invoervelden = document.querySelectorAll('.geldInput');
 
     invoervelden.forEach(function(invoer) {
+
         invoer.addEventListener('input', function() {
-            // Verwijder alle tekens behalve cijfers en komma's
-            this.value = this.value.replace(/[^\d.]/g, '');
+            let komma = false;
+            let nk = 0;
+            let newUserInvoer = "";
+            let userInvoer = invoer.value;
+            const waardes = "0123456789,";
+            const arrwaardes = waardes.split("");
 
-            // Formateer het eerste deel met punten voor duizendtallen
-            parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+            for(var i = 0; i < userInvoer.length && i < 5; i++ ){
+                if(arrwaardes.includes(userInvoer[i])){
+                    
+                
+                    if(userInvoer[i] == ","){
+                        if(!komma){
+                            komma = true;
+                            newUserInvoer+=userInvoer[i];
+                        }        
+                    }else{
+                        if(komma){
+                            newUserInvoer+=userInvoer[i];
+                            nk++;
+                            if(nk > 1){
+                                break;
+                            }
+                            
+                        }else{    
+                            newUserInvoer+=userInvoer[i];
+                        }  
+                    }             
+                } 
 
-            // Voeg de delen weer samen
-            this.value = parts.join(',');
+                // if(userInvoer[i] == "," && userInvoer[i + 1] == null){
+                //     newUserInvoer += "00";
+                //     komma = true;
+                // }
 
-            // Voeg ",00" toe als er nog geen komma in de invoer staat
-            if (!this.value.includes(',')) {
-                this.value += ',00';
             }
+            invoer.value = newUserInvoer;
 
-            // Verplaats de cursor naar het einde van de invoer
-            this.setSelectionRange(this.value.length, this.value.length);
         });
+
+        invoer.addEventListener('blur', function(){
+            let userInvoer = invoer.value;
+            if(userInvoer.split("").includes(",")){
+                let index =  userInvoer.split("").indexOf(",");
+                if(userInvoer[index + 1] == null){
+                    userInvoer += "00";
+                    invoer.value = userInvoer;
+                } else if(userInvoer[index + 2] == null){
+                    userInvoer += "0";
+                    invoer.value = userInvoer;
+                }
+            } else{
+                if(userInvoer.length > 0){
+                    userInvoer+= ",00";
+                    invoer.value = userInvoer;
+                }
+            }
+            
+        })
     });
 });

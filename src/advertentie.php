@@ -110,6 +110,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     <link rel="stylesheet" href="css/style.css">
     <script src="js/header.js"></script>
     <script src ="js/advertentie.js"></script>
+    <script src="js/geldinput.js"></script>
 </head>
 <body>
 
@@ -171,7 +172,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
-                <input type="number" placeholder="€" id="inputBiedingBox">
+                <input type="text" id="inputBiedingBox" class="geldInput">
                 <button id="plaatsBodBtn">Plaats bod</button>
             </div>
         </div>

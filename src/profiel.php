@@ -60,7 +60,6 @@
                         if(empty($logolocatie)){
                             echo '<input type="file" id="LogoInput" name="Logo" accept=".jpg,.png,.jpeg"">';
                         } else{
-
                             echo "<img src='afbeeldingenUsers/profielIcons/".$logolocatie."' id = 'bedrijfslogo'>";
                         }
                     ?>

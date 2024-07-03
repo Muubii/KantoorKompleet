@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", event =>{
     }
 
 HaalBiedingenOP();
-// setInterval(HaalBiedingenOP, 2000);
+setInterval(HaalBiedingenOP, 2000);
 function HaalBiedingenOP(){
     var url_string = window.location.href; 
     var url = new URL(url_string);
@@ -33,7 +33,8 @@ function HaalBiedingenOP(){
 }
 
 function NieuwBod(){
-    const nieuwBod = document.querySelector("#inputBiedingBox").value;
+    const inputbox = document.querySelector("#inputBiedingBox");
+    const nieuwBod = inputbox.value;
 
     var url_string = window.location.href; 
     var url = new URL(url_string);
@@ -43,6 +44,7 @@ function NieuwBod(){
     xhr.onload = function(){
         console.log(xhr.responseText);
         HaalBiedingenOP();
+        inputbox.value = "";
     }
     xhr.open("POST", "database verzoeken/plaatsBod.php");
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
