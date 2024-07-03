@@ -167,8 +167,9 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <button onclick="window.open('<?php echo $websiteURL; ?>', '_blank')">Website</button>
             </div>
 
-            <!-- manier vinden hoe je naar de persoon instantly gaat in php om chatten -->
-            <a href="chat.html"><button class="contact-seller">Bericht</button></a>
+            <input type="hidden" id="idadvertentie" value="<?php echo $id_advertentie; ?>">
+          <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
+             <button onclick="createChat()"  class="contact-seller">Start Chat</button>
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
@@ -178,6 +179,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         </div>
     </div>
     <script src="js/advertentie.js"></script>
+    <script src="js/chat.js"></script>
 </body>
 </html>
 

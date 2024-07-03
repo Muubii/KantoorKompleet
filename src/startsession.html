@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Chat</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <button id="start-chat-btn" data-advertentie-id="1">Start Chat</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#start-chat-btn').on('click', function() {
+                var advertentieId = $(this).data('advertentie-id');
+
+                $.ajax({
+                    url: 'chat_session.php', // Ensure this path is correct
+                    type: 'POST',
+                    data: { advertentie_id: advertentieId },
+                    success: function(response) {
+                        alert(response);
+                        // Optionally redirect to the chat page or load the chat interface
+                        // window.location.href = 'chat.html?chat_id=' + newlyCreatedChatId;
+                    },
+                    error: function(error) {
+                        console.error(error);
+                        alert('Failed to initiate chat. Please try again.');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

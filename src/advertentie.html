@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertentie</title>
+    <link rel="icon" href="images/logoSmall.svg" type="image/icon type">
+    <link rel="stylesheet" href="css/advertentie.css">
+    <link rel="stylesheet" href="css/header.css">
+</head>
+<body>
+
+    <header>
+        <div class="headerContent">
+            <div class="logoBox">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo">
+                <p class="logoTekst">Kantoor Compleet</p>
+            </div>
+
+            <nav class="headerNav">
+                <button id="chatbtn" onclick="location.href='chat.html'"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
+                <button id="plaatsaddbtn" onclick="location.href='plaatsadvertentie.html'"><img src="images/logoSmall.svg" alt="icon" class="navIcon">plaats Advertentie</button>
+                <div class="user_acc">
+                    <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
+                    <div class="usermenubox">
+                        <ul class="listUserOptions">
+                            <li class="useroption">Profiel</li>
+                            <li class="useroption">Uitloggen</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <div class="container">
+        <div class="product-details">
+            <h1>Gaming chair</h1>
+            <div class="product-images">
+                <img id="main-image" src="https://via.placeholder.com/400" alt="Product Image">
+                <div class="thumbnails">
+                    <img src="https://i5.walmartimages.com/asr/7621463c-60e1-4846-bd32-09c47a13ba9e.9141767d784a3eb5e4814a0e0d414822.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff/50" alt="Thumbnail 1" onclick="changeImage('https://i5.walmartimages.com/asr/7621463c-60e1-4846-bd32-09c47a13ba9e.9141767d784a3eb5e4814a0e0d414822.jpeg?odnWidth=612&odnHeight=612&odnBg=ffffff/400')">
+                    <img src="https://th.bing.com/th/id/OIP.MqnrBy28ktnIFQQB2SYneAHaHa?rs=1&pid=ImgDetMain/50" alt="Thumbnail 2" onclick="changeImage('https://th.bing.com/th/id/OIP.MqnrBy28ktnIFQQB2SYneAHaHa?rs=1&pid=ImgDetMain/400/0000FF')">
+                    <img src="https://th.bing.com/th/id/R.76e9d59a1d0c217b5bce73125fc92436?rik=06gtqIA48MKMiA&pid=ImgRaw&r=0/50" alt="Thumbnail 3" onclick="changeImage('https://th.bing.com/th/id/R.76e9d59a1d0c217b5bce73125fc92436?rik=06gtqIA48MKMiA&pid=ImgRaw&r=0/400/008000')">
+                    <img src="https://via.placeholder.com/50" alt="Thumbnail 4" onclick="changeImage('https://via.placeholder.com/400/FF0000')">
+                    <img src="https://via.placeholder.com/50" alt="Thumbnail 5" onclick="changeImage('https://via.placeholder.com/400/FFFF00')">
+                </div>
+            </div>
+            <div class="price">€ 100,00</div>
+            <div class="shipping">Afhalen</div>
+            <div class="features">
+                <div><span>Conditie:</span> Nieuw</div>
+                <div><span>Merk:</span> Wrox</div>
+                <div><span>Informatie:</span> Hij is een beetje gebruikt verder in nieuwe conditie.</div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="seller-info">
+                <h3>Subi</h3>
+                <p>16 jaar actief op Kantoor Compleet</p>
+                <p>Amsterdam</p>
+                <p>Status: Online</p>
+            </div>
+
+            <form id="contactForm">
+                <input type="hidden" id="idadvertentie" value="1"> 
+                <input type="hidden" id="bieder" value="0"> 
+                <button type="button" class="contact-seller" onclick="createChat()">Bericht</button>
+            </form>
+            <div class="bid-section">
+                <h3>Bieden</h3>
+                <input type="number" placeholder="€">
+                <button>Plaats bod</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/advertentie.js"></script>
+</body>
+</html>
