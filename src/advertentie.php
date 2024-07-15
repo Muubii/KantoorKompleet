@@ -161,20 +161,20 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
             <div class="seller-info">
                 <img src="afbeeldingenUsers/profielIcons/<?php echo $logolocatie?>" id = "logoVerkooper">
                 <h3><?php echo $bedrijfsnaam;?></h3>
-                <p><?php echo $bedrijfslocatie?></p>
-                <p><?php echo $mail?></p>
-                <p><?php echo $telefoon?></p>
-                <button onclick="window.open('<?php echo $websiteURL; ?>', '_blank')">Website</button>
+                <p><img src="images/icons/locatieicon.svg" class="icon"><?php echo $bedrijfslocatie?></p>
+                <p><img src="images/icons/mailicon.svg" class="icon"><?php echo $mail?></p>
+                <p><img src="images/icons/telefoonicon.svg" class="icon"><?php echo $telefoon?></p>
+                <button onclick="window.open('<?php echo $websiteURL; ?>', '_blank')"><img src="images/icons/websiteicon.svg" class="icon">Website</button>
             </div>
 
             <input type="hidden" id="idadvertentie" value="<?php echo $id_advertentie; ?>">
           <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
-             <button onclick="createChat()"  class="contact-seller">Start Chat</button>
+             <button onclick="createChat()"  class="contact-seller"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
                 <input type="text" id="inputBiedingBox" class="geldInput">
-                <button id="plaatsBodBtn">Plaats bod</button>
+                <button id="plaatsBodBtn"><img src="images/icons/biedingicon.svg" class="icon">Plaats bod</button>
             </div>
         </div>
     </div>

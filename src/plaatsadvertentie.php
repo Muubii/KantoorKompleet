@@ -66,7 +66,7 @@
                     <div class="inputbox">
                         <span class="verplicht">(verplicht)</span>
                         <label>Naam:</label>
-                        <input type="text" name="naam" required placeholder="Naam">
+                        <input type="text" name="naam" required placeholder="Naam" maxlength="50">
                     </div>
                     <div class="inputbox categorieënInput">
                         <span class="verplicht">(verplicht)</span>
@@ -82,13 +82,13 @@
 
                         <label for="prijs">Prijs:</label>
                         <div>
-                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput" max = "6">
+                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput" >
                             <span>€</span>
                         </div>
 
                         <label for="bieden">Bieden vanaf:</label>
                         <div>
-                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required class="geldInput" max="6">
+                            <input type="text" id="bieden" placeholder="0,00" name="bieden vanaf" required class="geldInput">
                             <span>€</span>
                         </div>
                         
@@ -101,7 +101,7 @@
                     <div class="inputbox beschrijfingsbox">
                         <span class="verplicht">(verplicht)</span>
                         <label for="Beschrijving">Beschrijving:</label>
-                        <textarea name="beschrijving" placeholder="Een korte beschrijfing over het product" id="beschrijving" required></textarea>
+                        <textarea name="beschrijving" placeholder="Een korte beschrijfing over het product" id="beschrijving" required maxlength="300"></textarea>
                     </div>
 
                     <button type="submit" id="submitBtn">Plaats advertentie</button>

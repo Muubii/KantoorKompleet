@@ -15,7 +15,6 @@ imageInput.addEventListener("change", (event) => {
         }
     }
         AllFiles.push(file);
-        AllFiles = AllFiles.slice(0, 10);
         const reader = new FileReader();
 
         reader.onload = (e) => {
@@ -33,6 +32,12 @@ imageInput.addEventListener("change", (event) => {
         reader.readAsDataURL(file);
     }
 });
+
+
+
+
+
+
 
 function clearAllDeleteButtons() {
     tiles.forEach(tile => {
@@ -105,15 +110,17 @@ function PlaceImagesFromArrayInTile() {
 
 const categorieënBox = document.querySelector(".categoriënbox");
 const arrow = document.querySelector(".arrowIcon");
-let boxisopen = false;
+let boxIsDicht = true;
+bekijkCategorien()
 function bekijkCategorien(){
-    arrow.parentNode.onclick = function(){
-        if (boxisopen){
-            boxisopen = false
+    arrow.parentElement.onclick = function(){
+        console.log("yayayayaya")
+        if (boxIsDicht){
+            boxIsDicht = false
             categorieënBox.classList.add("categoriënboxopen");
             arrow.classList.add("animation")
         } else{
-            boxisopen = true;
+            boxIsDicht = true;
             categorieënBox.classList.remove("categoriënboxopen");
             arrow.classList.remove("animation")
         }
@@ -200,5 +207,3 @@ advertentieform.addEventListener("submit", function(event) {
         reader.readAsArrayBuffer(file);
     });
 });
-
-

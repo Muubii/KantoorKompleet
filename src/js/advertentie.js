@@ -17,7 +17,7 @@ window.addEventListener("DOMContentLoaded", event =>{
     }
 
 HaalBiedingenOP();
-setInterval(HaalBiedingenOP, 2000);
+// setInterval(HaalBiedingenOP, 2000);
 function HaalBiedingenOP(){
     var url_string = window.location.href; 
     var url = new URL(url_string);

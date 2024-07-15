@@ -21,7 +21,7 @@
                 $bedrijsnaam = $row['Bedrijfsnaam'];
                 $prijs = str_replace(".",",",''.$row['prijs'].'');
                 $logoglocatie = $row['logolocatie'];
-                echo "<div class='bieding'><div class= 'bedrijfsnaam'>"."<img src='afbeeldingenUsers/profielIcons/$logoglocatie' class='biedingBedrijfIcons'>".$bedrijsnaam."</div><div class='prijs'>".'€ '.$prijs."</div></div>";
+                echo "<div class='bieding'><div class= 'bedrijfsnaam'>"."<img src='afbeeldingenUsers/profielIcons/$logoglocatie' class='biedingBedrijfIcons'><p>".$bedrijsnaam."</p></div><div class='prijs'>".'€ '.$prijs."</div></div>";
             }
         }
     }

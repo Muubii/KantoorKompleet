@@ -111,6 +111,8 @@ body {
 
 .sidebar .bid-section {
   margin-top: 20px;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
 }
 
 .sidebar .bid-section input {
@@ -140,11 +142,35 @@ body {
 #logoVerkooper{
   height: 50px;
 }
-.biedingBedrijfIcons{
+.icon{
+  height: 20px;
+}
+.bieding {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: center;
+  height: min-content;
+  max-width: max-content;
+  gap: 10px;
+  margin: 10px 0px 10px 0px;
+}
+
+.bedrijfsnaam {
+  display: flex;
+  align-items: center;
+}
+
+.bedrijfsnaam img {
   height: 30px;
   width: 30px;
   border-radius: 100%;
+  margin-right: 5px;
 }
+
+.bedrijfsnaam p {
+  margin: 0;
+}
+
 .features div {
   flex: 1 1 50%;
   padding: 10px;
