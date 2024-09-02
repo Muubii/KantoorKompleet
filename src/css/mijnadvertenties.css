@@ -3,43 +3,70 @@ main {
     min-height: 80vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
+    padding: 20px;
 }
 
 .alleAdvertentiesbox {
     display: grid;
-    gap: 10px;
-    height: 700px;
-    max-width: 1200px;
+    gap: 20px;
     width: 100%;
+    max-width: 1200px;
     padding: 20px;
-    border-radius: 20px;
-    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .advertentiebox {
-    width: 100%;
-    height: 150px;
-    background-color: lightblue;
     display: flex;
-    flex-direction: row;
-    padding: 10px;
+    align-items: center;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: background-color 0.3s, box-shadow 0.3s;
     cursor: pointer;
-    transition: .15s;
+    border: 1px solid #ddd;
 }
 
 .advertentiebox:hover {
-    background-color: coral;
+    background-color: #f0f0f0;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .advertentieafbeelding {
-    min-height: 100%;
     width: 150px;
+    height: 100%;
     object-fit: cover;
+    border-right: 1px solid #ddd;
+}
+
+.advertentieContent {
+    padding: 15px;
+    flex: 1;
 }
 
 .advertentieNaam {
-    font-size: x-large;
+    font-size: 1.2em;
+    margin: 0;
+    color: #333;
+}
+
+.advertentiePrijs {
+    font-size: 1.1em;
+    color: #666;
+    margin: 5px 0;
+}
+
+.advertentieDatum {
+    font-size: 0.9em;
+    color: #999;
+}
+
+.Gray {
+    filter: grayscale(100%) brightness(70%);
+    background-color: #f0f0f0; /* Lichtere achtergrondkleur voor een uitgeschakelde uitstraling */
+    border: 1px solid #ddd;    /* Dunnere rand om de uitgeschakelde uitstraling te versterken */
+    opacity: 0.6;             /* Verminderde opaciteit voor een 'uitgeschakelde' look */
+    pointer-events: none;     /* Voorkom dat gebruikers met de muis op de uitgeschakelde advertenties klikken */
 }

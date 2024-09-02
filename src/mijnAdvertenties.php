@@ -53,7 +53,10 @@
                             afbeeldingen.afbeeldinglocatie as afbeeldinglocatie
             FROM advertentie
             INNER JOIN afbeeldingen USING (idadvertentie)
-            WHERE advertentie.idgebruiker = ". $idgebruiker ." AND afbeeldingen.`order` = '1'";
+            WHERE advertentie.idgebruiker = ". $idgebruiker ." AND afbeeldingen.`order` = '1'
+            ORDER BY automatischeverwijdering desc;"
+            
+            ;
 
                     
 
@@ -67,6 +70,8 @@
             $stmt = $conn->prepare($sql1);
             $stmt->execute();
             $result = $stmt->get_result();
+            
+            $firsttime = true;
             if($result->num_rows > 0){
                 while($row = $result->fetch_assoc()){
                     $naam_advertentie = $row['naamadvertentie'];
@@ -76,11 +81,21 @@
                     $id_advertentie = $row['id'];
                     $logolocatie = $row['afbeeldinglocatie'];
                     $verwijderdatum = $row['verwijderdatum'];
+                    $currentDate = date('Y-m-d H:i:s');
+                    $class = ($currentDate > $verwijderdatum) ? 'Gray' : '';
+
+                    if($class == "Gray" && $firsttime){
+                        $firsttime = false;
+                        echo "<div>";
+                            echo "<h4>Automatisch Verwijderde advertenties<h4>";
+                            echo "<hr>";
+                        echo "</div>";
+
+                    }
 
 
 
-
-                    echo "<div class='advertentiebox' advertentieId='$id_advertentie'>";
+                    echo "<div class='advertentiebox ".$class."' advertentieId='$id_advertentie'>";
                     echo "<img src='afbeeldingenUsers/".$logolocatie."' class='advertentieafbeelding'>";
                     echo "<div class='advertentieContent'>";
                         echo "<h4 class='advertentieNaam'>".$naam_advertentie."</h4>";

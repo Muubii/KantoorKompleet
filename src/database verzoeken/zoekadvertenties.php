@@ -45,19 +45,20 @@
     }
 
     $stmt = $conn->prepare("SELECT advertentie.idadvertentie as id, 
-       advertentie.Naam as naam, 
-       advertentie.prijs as prijs, 
-       afbeeldingen.afbeeldinglocatie as locatie,
-       afbeeldingen.order as orderimage,
-       gebruiker.logolocatie as logolocatie,
-       advertentieCategorieën.idcategorie as idcategorie
-FROM advertentie
-INNER JOIN afbeeldingen USING(idadvertentie)
-INNER JOIN gebruiker USING(idgebruiker)
-INNER JOIN advertentieCategorieën USING(idadvertentie)
-WHERE afbeeldingen.order = 1 ". $everyCondition . "
-GROUP BY advertentie.idadvertentie"
-                            );
+                 advertentie.Naam as naam, 
+                 advertentie.prijs as prijs, 
+                 afbeeldingen.afbeeldinglocatie as locatie,
+                 afbeeldingen.`order` as orderimage,
+                 gebruiker.logolocatie as logolocatie,
+                 advertentieCategorieën.idcategorie as idcategorie
+          FROM advertentie
+          INNER JOIN afbeeldingen USING(idadvertentie)
+          INNER JOIN gebruiker USING(idgebruiker)
+          INNER JOIN advertentieCategorieën USING(idadvertentie)
+WHERE afbeeldingen.`order` = 1 AND advertentie.automatischeverwijdering > NOW()
+            " . $everyCondition . " 
+          GROUP BY advertentie.idadvertentie;"
+                            );                      
     $stmt->execute();
     $result = $stmt->get_result();
     if($result->num_rows > 0){

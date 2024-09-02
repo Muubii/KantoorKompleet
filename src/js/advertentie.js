@@ -42,6 +42,9 @@ window.addEventListener("DOMContentLoaded", event => {
 
         let xhr = new XMLHttpRequest()
         xhr.onload = function () {
+            if(xhr.responseText.includes("Same")){
+                alert("Je kan niet op je eigen advertentie bieden")
+            }
             console.log(xhr.responseText);
             HaalBiedingenOP();
             inputbox.value = "";

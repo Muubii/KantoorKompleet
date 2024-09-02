@@ -1,4 +1,4 @@
-const deleteBtn = document.querySelector("#verwijderadvertentieBtn");
+const deleteBtn = document.querySelector("#verwijderAdvertentieBtn");
 deleteBtn.onclick = function () {
     var url_string = window.location.href;
     var url = new URL(url_string);
