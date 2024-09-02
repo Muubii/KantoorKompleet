@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const formData = new FormData(form);
         let xhr = new XMLHttpRequest();
         xhr.onload = function () {
-            // console.log(xhr.responseText)
+            console.log(xhr.responseText)
             alert("Profiel succesvol geüpdatet")
         }
         xhr.open("POST", "database verzoeken/profielGegevens.php");

@@ -4,8 +4,9 @@
     $idgebruiker = $_SESSION['idGebruiker'];
     print_r($_FILES);
 
+$fileUpload = false;;
     if(isset($_FILES['Logo']) && !empty($_FILES['Logo'] ) && $_FILES['Logo']['error'] === 0){
-        
+        $fileUpload = true;
         $logo = $_FILES['Logo'];
         $target_dir = "../afbeeldingenUsers/profielIcons/";
 
@@ -42,14 +43,14 @@
     $mail = $_POST['Mail'];
     $telefoon = $_POST['Telefoon'];
 
-        echo "hoi";
     echo $websiteURL;
     echo $locatie;
     echo $mail;
     echo $telefoon;
 
 
-if(isset($_FILES['Logo'])){
+if($fileUpload){
+echo "jup";
     $stmt = $conn->prepare("UPDATE gebruiker
                             SET logolocatie = ?, websitelink = ?, bedrijfslocatie = ?, mail = ?, telefoon = ?
                             WHERE idGebruiker = ?
@@ -67,9 +68,4 @@ if(isset($_FILES['Logo'])){
     $stmt->bind_param("ssssi" ,$websiteURL, $locatie, $mail, $telefoon, $idgebruiker);
     $stmt->execute();
 }
-
-echo "het is gelukt";
-
-
-
 ?>
