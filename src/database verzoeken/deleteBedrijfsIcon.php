@@ -22,8 +22,8 @@
         $stmt->execute();
 
 
-        if (file_exists("afbeeldingenUsers/profielIcons/". $filename)) {
-            unlink("afbeeldingenUsers/profielIcons/". $filename);
+        if (file_exists("../afbeeldingenUsers/profielIcons/". $filename)) {
+            unlink("../afbeeldingenUsers/profielIcons/". $filename);
           } else {
             echo 'Could not delete '.$filename.', file does not exist';
           }

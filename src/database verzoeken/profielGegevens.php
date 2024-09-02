@@ -4,9 +4,8 @@
     $idgebruiker = $_SESSION['idGebruiker'];
     print_r($_FILES);
 
-    if(isset($_FILES['Logo'])){
+    if(isset($_FILES['Logo']) && !empty($_FILES['Logo'] ) && $_FILES['Logo']['error'] === 0){
         
-        echo "jasssaassaa";
         $logo = $_FILES['Logo'];
         $target_dir = "../afbeeldingenUsers/profielIcons/";
 
@@ -31,8 +30,8 @@
         if(move_uploaded_file($logo["tmp_name"], $target_dir . $newfilename)){
             echo "het bestand is geupload";
         } else{
-            echo "het is niet gelukt";
-            exit();
+        echo "het is niet gelukt";
+        exit();
         }
     }
 
@@ -42,6 +41,13 @@
     $locatie = $_POST['Locatie'];
     $mail = $_POST['Mail'];
     $telefoon = $_POST['Telefoon'];
+
+        echo "hoi";
+    echo $websiteURL;
+    echo $locatie;
+    echo $mail;
+    echo $telefoon;
+
 
 if(isset($_FILES['Logo'])){
     $stmt = $conn->prepare("UPDATE gebruiker

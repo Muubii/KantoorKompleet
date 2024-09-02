@@ -1,6 +1,8 @@
-.tile, .placeholder-tile {
+.tile,
+.placeholder-tile {
     user-select: none;
 }
+
 .tile.dragging {
     height: 76px;
     width: 76px;
@@ -11,7 +13,7 @@
     cursor: grabbing;
 }
 
-@media screen and (max-width: 450px){
+@media screen and (max-width: 450px) {
     .tile.dragging {
         height: 66px;
         width: 66px;

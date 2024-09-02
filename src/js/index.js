@@ -1,28 +1,27 @@
-window.addEventListener("DOMContentLoaded", function(event){
+window.addEventListener("DOMContentLoaded", function (event) {
     const advertentieBox = document.querySelector(".advertentieBox");
 
 
     tekenAdvertenties();
 
-    function tekenAdvertenties(){
+    function tekenAdvertenties() {
         const xhr = new XMLHttpRequest();
-        xhr.onload = function(){
+        xhr.onload = function () {
             advertentieBox.innerHTML = xhr.responseText;
             gaNaarAdvertentie()
         }
-        xhr.open("POST", "database verzoeken/HomeAdvertenties.php");
+        xhr.open("POST", "database verzoeken/zoekadvertenties.php");
         xhr.send();
     }
 
 
-function gaNaarAdvertentie(){
+    function gaNaarAdvertentie() {
         let advertenties = document.querySelectorAll(".advertentie");
         advertenties.forEach(advertentie => {
-            advertentie.onclick = function(){
+            advertentie.onclick = function () {
                 let idadvertentie = advertentie.getAttribute('advertentieId');
                 window.location.href = "/advertentie.php?id=" + idadvertentie;
             }
         });
     }
-
 });

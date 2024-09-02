@@ -105,37 +105,37 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advertentie</title>
     <link rel="icon" href="images/logoSmall.svg" type="image/icon type">
-    <link rel="stylesheet" href="css/advertentie.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/header.js"></script>
-    <script src ="js/advertentie.js"></script>
-    <script src="js/geldinput.js"></script>
+    <link rel="stylesheet" href="css/advertentie.css">
 </head>
 <body>
 
 <header>
-    <div class="headerContent">
-        <div class="logoBox">
-            <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
-            <p class="logoTekst">Kantoor Compleet</p>
-        </div>
-        <nav class="headerNav">
-            <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
-            <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
-            <div class="user_acc">
-                <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
-                <div class="usermenubox">
-                    <ul class="listUserOptions">
-                        <li class="useroption profiel">Profiel</li>
-                        <li class="useroption uitloggen">Uitloggen</li>
-                    </ul>
-                </div>
+        <div class="headerContent">
+            <div class="logoBox">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
+                <p class="logoTekst">Kantoor Compleet</p>
             </div>
-        </nav>
-    </div>
+
+            <nav class="headerNav">
+                <button id="hamburgerMenu"><img src="images/icons/hamburgericon.svg" class="icon" alt="icon"></button>
+                <button id="chatbtn" class="navBtn btnIcon"><img src="images/icons/chatIcon.svg" alt="icon" class="icon">Berichten</button>
+                <button id="plaatsaddbtn" class="navBtn btnIcon"><img src="images/logoSmall.svg" alt="icon" class="icon">Nieuwe advertentie</button>
+                <button id="mijnaddbtn" class="navBtn btnIcon"><img src="images/icons/mijnadvertentiesicon.svg" alt="icon" class="icon">Mijn advertenties</button>
+                <div class="user_acc">
+                    <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
+                    <div class="usermenubox">
+                        <ul class="listUserOptions">
+                            <li class="useroption profiel">Profiel</li>
+                            <li class="useroption uitloggen">Uitloggen</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
 </header>
-    <main>
+<main>
     <div class="container">
         <div class="product-details">
             <h1><?php echo $naam_advertentie?></h1>
@@ -152,34 +152,55 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
             </div>
             <div class="price">€ <?php echo $prijs;?></div>
             <div class="features">
-                <div><span>Advertentie ID: </span><?php print_r($id_advertentie);?></div>
+                <div><span>Advertentie ID: </span><?php echo $id_advertentie;?></div>
                 <div><span>Categorieën: </span><?php foreach($naam_categorie as $categorie){echo " #".$categorie;}?></div>
                 <div><span>Beschrijving:<br> </span><?php echo $beschrijving?></div>
             </div>
         </div>
-        <div class="sidebar">
-            <div class="seller-info">
-                <img src="afbeeldingenUsers/profielIcons/<?php echo $logolocatie?>" id = "logoVerkooper">
-                <h3><?php echo $bedrijfsnaam;?></h3>
-                <p><img src="images/icons/locatieicon.svg" class="icon"><?php echo $bedrijfslocatie?></p>
-                <p><img src="images/icons/mailicon.svg" class="icon"><?php echo $mail?></p>
-                <p><img src="images/icons/telefoonicon.svg" class="icon"><?php echo $telefoon?></p>
-                <button onclick="window.open('<?php echo $websiteURL; ?>', '_blank')"><img src="images/icons/websiteicon.svg" class="icon">Website</button>
+        <div class="advertentieinfo">
+            <div class="seller-info-box">
+                <div class="seller-name">
+                    <img src="afbeeldingenUsers/profielIcons/<?php echo $logolocatie?>" id = "logoVerkooper">
+                    <h3><?php echo $bedrijfsnaam;?></h3>
+                </div>
+
+                <?php
+                    if (!empty($bedrijfslocatie)) {
+                        echo '<span class="seller-info"><img src="images/icons/locatieicon.svg" class="icon">' . $bedrijfslocatie . '</span>';
+                    }
+                    if (!empty($mail)) {
+                        echo '<span class="seller-info"><img src="images/icons/mailicon.svg" class="icon">' . $mail . '</span>';
+                    }
+                    if (!empty($telefoon)) {
+                        echo '<span class="seller-info"><img src="images/icons/telefoonicon.svg" class="icon">' . $telefoon . '</span>';
+                    }
+                    if (!empty($websiteURL)) {
+                        echo '<button class="iconBtn" onclick="window.open(\'' . $websiteURL . '\', \'_blank\')"><img src="images/icons/websiteicon.svg" class="icon">Website</button>';
+                    }
+                    ?>
             </div>
 
             <input type="hidden" id="idadvertentie" value="<?php echo $id_advertentie; ?>">
-          <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
-             <button onclick="createChat()"  class="contact-seller"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
+            <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
+             <button onclick="createChat()" class="iconBtn"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
-                <input type="text" id="inputBiedingBox" class="geldInput">
-                <button id="plaatsBodBtn"><img src="images/icons/biedingicon.svg" class="icon">Plaats bod</button>
+                <div class="prijsbox">
+                    <input type="text" id="inputBiedingBox" class="geldInput" placeholder="0,00">
+                    <span>€</span>
+                </div>
+                
+                <button id="plaatsBodBtn" class="iconBtn"><img src="images/icons/biedingicon.svg" class="icon">Plaats bod</button>
             </div>
         </div>
     </div>
     <script src="js/advertentie.js"></script>
+    <script src="js/header.js"></script>
+    <script src ="js/advertentie.js"></script>
+    <script src="js/geldinput.js"></script>
     <script src="js/chat.js"></script>
+</main>
 </body>
 </html>
 
