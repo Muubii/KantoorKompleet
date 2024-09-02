@@ -1,0 +1,45 @@
+main {
+    width: 100vw;
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.alleAdvertentiesbox {
+    display: grid;
+    gap: 10px;
+    height: 700px;
+    max-width: 1200px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+
+
+.advertentiebox {
+    width: 100%;
+    height: 150px;
+    background-color: lightblue;
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    cursor: pointer;
+    transition: .15s;
+}
+
+.advertentiebox:hover {
+    background-color: coral;
+}
+
+.advertentieafbeelding {
+    min-height: 100%;
+    width: 150px;
+    object-fit: cover;
+}
+
+.advertentieNaam {
+    font-size: x-large;
+}

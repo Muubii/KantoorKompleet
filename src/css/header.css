@@ -1,31 +1,50 @@
-
-header{
+header {
     padding: 10px;
     background-color: rgb(140, 140, 140);
-    
-}
-@media screen and (max-width: 950px) {
-    .logoTekst {
-     display: none;
-    }
-}
-@media screen and (max-width: 700px){
-  .headerNav button{
-    color: transparent; /* Verberg de tekst door de kleur transparant te maken */
-    text-indent: -9999px; /* Verplaats de tekst uit het zicht */
-    overflow: hidden; /* Zorg ervoor dat de tekst die buiten het zicht is, niet zichtbaar wordt */
-    white-space: nowrap; /* Voorkom dat de tekst naar de volgende regel springt */
-}   
+    z-index: 999;
+    position: sticky;
+    top: 0;
+    width: 100vw;
+
 }
 
-  
-.headerContent{
+#hamburgerMenu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1100px) {
+    .logoTekst {
+        display: none;
+    }
+}
+
+
+@media screen and (max-width: 750px) {
+    .headerNav .navBtn {
+        display: none;
+    }
+
+    #hamburgerMenu {
+        visibility: visible;
+
+    }
+}
+
+
+.headerContent {
     display: grid;
     grid-template-columns: auto auto;
     height: max-content;
 }
 
-.logoBox{
+.logoBox {
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -34,39 +53,47 @@ header{
     width: max-content;
 }
 
-.logo{
+.logo {
     height: 100px;
     cursor: pointer;
-    
+
 }
-.logoTekst{
+
+.logoTekst {
     color: transparent;
     font-weight: 900;
     font-size: 40px;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     -webkit-text-stroke: 2px black;
 }
 
-.headerNav{
+.headerNav {
     display: flex;
     text-align: center;
     flex-direction: row;
     margin-left: auto;
     gap: 10px;
-    height: 30px
+    height: 30px;
 }
-.headerNav button{
+
+.headerNav button {
+    padding: 15px;
+}
+
+.btnIcon {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
     gap: 5px;
 }
-.navIcon{
+
+
+
+.icon {
     height: 25px;
 }
 
-.user_acc{
+.user_acc {
     height: 70px;
     width: 70px;
     background-color: white;
@@ -75,44 +102,82 @@ header{
     overflow: hidden;
     cursor: pointer;
     transition: .5s;
-    z-index: 9;
+    z-index: 999;
 }
 
-.listUserOptions:last-child{
+.listUserOptions:last-child {
     border-bottom: 1px solid black;
 }
-.useroption{
+
+.useroption {
     text-align: center;
     padding: 10px 0px 10px 0px;
     border-top: 1px solid black;
 }
-.useroption:hover{
+
+.useroption:hover {
     background-color: lightgray;
 }
-ul{
-    list-style:none;
+
+ul {
+    list-style: none;
 }
-.open{
+
+.open {
     height: 200px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.usericonbox{
+.usericonbox {
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
 
-.personIcon{
+.personIcon {
     width: 50%;
 }
 
-.filter{
-    grid-column: 1/3;
-    display: flex;
-    justify-content: center;
+
+button {
+    cursor: pointer;
 }
 
-button{
-    cursor: pointer;
+.overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.sidebar {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 0px;
+    height: 100vh;
+    z-index: 9999;
+    transition: .5s;
+
+}
+
+.sidebarOpen {
+    display: block;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.5);
+    height: 100vh;
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.closeSidebarBtn {
+    height: min-content;
+    width: min-content;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
