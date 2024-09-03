@@ -7,6 +7,7 @@ body {
 
 .container {
   display: grid;
+  grid-template-columns: 20px 1fr;
   grid-template-rows: 40px 1fr;
   grid-template-columns: 0px 1fr;
   height: 100vh;
@@ -64,11 +65,13 @@ header {
 }
 
 .chat-window {
+  flex: 1;
   width: 100vh;
   height: 95vh;
   background-color: #e0e0e0;
   display: flex;
   flex-direction: column;
+
 }
 
 .chat-header {
@@ -83,6 +86,7 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  
 }
 
 .chat-bubble {
@@ -131,7 +135,7 @@ header {
   color: #fff;
 }
 
-#menu__toggle {
+/* #menu__toggle {
   opacity: 0;
 }
 
@@ -147,43 +151,43 @@ header {
 #menu__toggle:checked + .menu__btn > span::after {
   top: 0;
   transform: rotate(90deg);
-}
+} */
 
-#menu__toggle:checked ~ .menu__box {
+/* #menu__toggle:checked ~ .menu__box {
   left: 0 !important;
-}
+} */
 
-.menu__btn {
-  position: fixed;
-  top: 200px;
-  left: 20px;
-  width: 26px;
-  height: 26px;
-  cursor: pointer;
-  z-index: 1001;
-}
+  /* .menu__btn {
+    position: fixed;
+    top: 200px;
+    left: 20px;
+    width: 26px;
+    height: 26px;
+    cursor: pointer;
+    z-index: 1001;
+  }
 
-.menu__btn > span,
-.menu__btn > span::before,
-.menu__btn > span::after {
-  display: block;
-  position: absolute;
-  width: 80%;
-  height: 2px;
-  background-color: #616161;
-  transition-duration: .25s;
-}
+  .menu__btn > span,
+  .menu__btn > span::before,
+  .menu__btn > span::after {
+    display: block;
+    position: absolute;
+    width: 80%;
+    height: 2px;
+    background-color: #616161;
+    transition-duration: .25s;
+  }
 
-.menu__btn > span::before {
-  content: '';
+  .menu__btn > span::before { */
+  /* content: '';
   top: -8px;
-}
-
+} */
+/* 
 .menu__btn > span::after {
   content: '';
   top: 8px;
-}
-
+} */
+/* 
 .menu__box {
   display: block;
   position: fixed;
@@ -197,8 +201,16 @@ header {
   background-color: #aaadae;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
   transition-duration: .25s;
+} */
+
+.chatUsers{
+  width: 10vh;
+  height:0vh;
+  display: flex;
+  flex-direction:column;
 }
 
+ 
 .menu__item {
   display: block;
   padding: 12px 24px;
@@ -207,7 +219,7 @@ header {
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
-  transition-duration: .25s;
+  /* transition-duration: .25s; */
 }
 
 .menu__item:hover {

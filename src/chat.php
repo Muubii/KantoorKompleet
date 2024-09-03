@@ -2,8 +2,24 @@
 include 'database verzoeken/ConnDb.php';
 include 'php/checkSession.php';
 
-
 $idchat = isset($_GET['idchat']) ? $conn->real_escape_string($_GET['idchat']) : '';
+$currentUserId = $_SESSION['idGebruiker'];
+
+// cheken als deze gebruiker in de chat is
+$query = "SELECT advertentie.idGebruiker, chat.bieder
+          FROM chat 
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie 
+          WHERE chat.idchat = ? AND (advertentie.idGebruiker = ? OR chat.bieder = ?)";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('iii', $idchat, $currentUserId, $currentUserId);
+$stmt->execute();
+$stmt->store_result();
+
+
+
+$stmt->close();
+
+// gebruiker of verkoper 
 $isverkooper = ($_SESSION['idGebruiker'] == get_advertentie_owner($idchat, $conn)) ? 1 : 0;
 
 function get_advertentie_owner($idchat, $conn) {
@@ -43,7 +59,7 @@ function get_advertentie_owner($idchat, $conn) {
                 <p class="logoTekst">Kantoor Compleet</p>
             </div>
             <nav class="headerNav">
-                <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
+            <a href="chat.php"><button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button></a>
                 <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
                 <div class="user_acc">
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
@@ -57,21 +73,41 @@ function get_advertentie_owner($idchat, $conn) {
             </nav>
         </div>
     </header>
+
     <main>
-        <input id="menu__toggle" type="checkbox" />
+      
         <label class="menu__btn" for="menu__toggle">
             <span></span>
         </label>
         <ul class="menu__box">
-            <li><a class="menu__item" href="#">Richard</a></li>
-            <li><a class="menu__item" href="#">Nina</a></li>
-            <li><a class="menu__item" href="#">Anna</a></li>
-            <li><a class="menu__item" href="#">Sam</a></li>
-            <li><a class="menu__item" href="#">Mubi</a></li>
+            <!-- je bedrijfsnaam -->
+            <?php
+$query = "SELECT gebruiker.Bedrijfsnaam, chat.bieder, chat.idchat, chat.idadvertentie
+          FROM chat
+          INNER JOIN gebruiker ON chat.bieder = gebruiker.idGebruiker
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
+          WHERE chat.bieder = ? OR advertentie.idGebruiker = ?";
+
+$stmt = $conn->prepare($query);
+$currentUserId = $_SESSION['idGebruiker'];
+$stmt->bind_param('ii', $currentUserId, $currentUserId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $biederId = $row["bieder"];
+        $biederBedrijfsnaam = $row["Bedrijfsnaam"];
+        $idChat = $row["idchat"];
+        echo "<li><a class='menu__item' href='chat.php?idchat=$idChat'>$biederBedrijfsnaam</a></li>";
+    }
+}
+$stmt->close();
+?>
         </ul>
 
         <div class="chat-window">
-            <div class="chat-header">Chat with <span id="chatWith">Sam</span></div>
+            <div class="chat-header">Chat with <span id="chatWith"><?php echo $biederBedrijfsnaam;?></span></div>
             <div class="chat-content">
                 <div id="chatBox"></div>
             </div>
@@ -83,6 +119,7 @@ function get_advertentie_owner($idchat, $conn) {
                 <button id="send-btn" class="button">Send</button>
             </div>
         </div>
+
     </main>
 
 <script src="js/chat.js"></script>

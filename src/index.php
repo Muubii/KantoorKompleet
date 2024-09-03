@@ -24,7 +24,7 @@
             </div>
 
             <nav class="headerNav">
-                <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
+            <a href="chat.php"><button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button></a>
                 <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe advertentie</button>
                 <div class="user_acc">
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
