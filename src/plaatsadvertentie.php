@@ -12,33 +12,34 @@
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/plaatsadvertentie.css">
     <link rel="stylesheet" href="css/sorteblegrid.css">
-    <script src="js/header.js"></script>
-    <script src="js/sorteblegrid.js"></script>
-    <script src="js/geldinput.js"></script>
 </head>
 <body>
 <header>
-    <div class="headerContent">
-        <div class="logoBox">
-            <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
-            <p class="logoTekst">Kantoor Compleet</p>
-        </div>
-        <nav class="headerNav">
-            <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
-            <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
-            <div class="user_acc">
-                <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
-                <div class="usermenubox">
-                    <ul class="listUserOptions">
-                        <li class="useroption profiel">Profiel</li>
-                        <li class="useroption uitloggen">Uitloggen</li>
-                    </ul>
-                </div>
+        <div class="headerContent">
+            <div class="logoBox">
+                <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
+                <p class="logoTekst">Kantoor Compleet</p>
             </div>
-        </nav>
-    </div>
-</header>
-        <div class="uploadAdvertentieBox">
+
+            <nav class="headerNav">
+                <button id="hamburgerMenu"><img src="images/icons/hamburgericon.svg" class="icon" alt="icon"></button>
+                <button id="chatbtn" class="navBtn btnIcon"><img src="images/icons/chatIcon.svg" alt="icon" class="icon">Berichten</button>
+                <button id="plaatsaddbtn" class="navBtn btnIcon"><img src="images/logoSmall.svg" alt="icon" class="icon">Nieuwe advertentie</button>
+                <button id="mijnaddbtn" class="navBtn btnIcon"><img src="images/icons/mijnadvertentiesicon.svg" alt="icon" class="icon">Mijn advertenties</button>
+                <div class="user_acc">
+                    <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
+                    <div class="usermenubox">
+                        <ul class="listUserOptions">
+                            <li class="useroption profiel">Profiel</li>
+                            <li class="useroption uitloggen">Uitloggen</li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main>
+       <div class="uploadAdvertentieBox">
 
             <div class="uploadImgBox">
                 <div class="imgBox">
@@ -66,7 +67,7 @@
                     <div class="inputbox">
                         <span class="verplicht">(verplicht)</span>
                         <label>Naam:</label>
-                        <input type="text" name="naam" required placeholder="Naam">
+                        <input type="text" name="naam" required placeholder="Naam" maxlength="30">
                     </div>
                     <div class="inputbox categorieënInput">
                         <span class="verplicht">(verplicht)</span>
@@ -82,7 +83,7 @@
 
                         <label for="prijs">Prijs:</label>
                         <div>
-                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput">
+                            <input type="text" id="prijs" placeholder="0,00" name="prijs" required class="geldInput" >
                             <span>€</span>
                         </div>
 
@@ -95,13 +96,13 @@
                     </div>
                     <div class="inputbox">
                         <label for="timeForDeletion">Automatische verwijdering:</label>
-                        <input type="date" id="timeForDeletion" name="automatische verwijdering">
+                        <input type="datetime-local" id="timeForDeletion" name="automatische verwijdering">
                     </div>
 
                     <div class="inputbox beschrijfingsbox">
                         <span class="verplicht">(verplicht)</span>
                         <label for="Beschrijving">Beschrijving:</label>
-                        <textarea name="beschrijving" placeholder="Een korte beschrijfing over het product" id="beschrijving" required></textarea>
+                        <textarea name="beschrijving" placeholder="Een korte beschrijfing over het product" id="beschrijving" required maxlength="300"></textarea>
                     </div>
 
                     <button type="submit" id="submitBtn">Plaats advertentie</button>
@@ -109,6 +110,9 @@
             </form>
         </div>
     </main>
+    <script src="js/header.js"></script>
+    <script src="js/sorteblegrid.js"></script>
+    <script src="js/geldinput.js"></script>
 </body>
 <script src="js/plaatsadvertentie.js"></script>
 </html>

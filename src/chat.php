@@ -45,22 +45,22 @@ function get_advertentie_owner($idchat, $conn) {
     <title>Chat System</title>
     <link rel="stylesheet" href="css/chat.css">
     <link rel="icon" href="images/logoSmall.svg" type="image/icon type">
-    <link rel="stylesheet" href="css/advertentie.css">
-    <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/header.js"></script>
 </head>
 <body>
-
-    <header>
+<header>
         <div class="headerContent">
             <div class="logoBox">
                 <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
                 <p class="logoTekst">Kantoor Compleet</p>
             </div>
+
             <nav class="headerNav">
-            <a href="chat.php"><button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button></a>
-                <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
+                <button id="hamburgerMenu"><img src="images/icons/hamburgericon.svg" class="icon" alt="icon"></button>
+                <button id="chatbtn" class="navBtn btnIcon"><img src="images/icons/chatIcon.svg" alt="icon" class="icon">Berichten</button>
+                <button id="plaatsaddbtn" class="navBtn btnIcon"><img src="images/logoSmall.svg" alt="icon" class="icon">Nieuwe advertentie</button>
+                <button id="mijnaddbtn" class="navBtn btnIcon"><img src="images/icons/mijnadvertentiesicon.svg" alt="icon" class="icon">Mijn advertenties</button>
                 <div class="user_acc">
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
                     <div class="usermenubox">
@@ -71,6 +71,24 @@ function get_advertentie_owner($idchat, $conn) {
                     </div>
                 </div>
             </nav>
+
+            <form class="filter" id="filteradvertenties">
+                <div class="topOfGrid">
+                    <button class="filtericon" type="button"><img src="images\icons\filtericon.svg" alt="icon" class="icon"></button>
+                    <input type="text" placeholder="Zoeken" id="zoekInput" name="zoekInput">
+                    <div class="extraFilters">
+                        <select id="categorieënInput" name="categorieënInput">
+                        <option value="0">alle categorieën</option>
+                        </select>
+                        <input type="text" placeholder="van" id="vanPrijsInput" class="geldInput" name="vanPrijsInput">
+                        <input type="text" placeholder="tot" id="totPrijsInput" class="geldInput" name="totPrijsInput">
+                    </div>
+
+                <button type="submit" class="btnIcon"><img src="images/icons/zoekicon.svg" class="icon">zoeken</button>
+                </div>
+                <div class="bottomOfGrid"></div>
+            </form>
+
         </div>
     </header>
 
@@ -123,5 +141,6 @@ $stmt->close();
     </main>
 
 <script src="js/chat.js"></script>
+<script src="js/header.js"></script>
 </body>
 </html>

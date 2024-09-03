@@ -1,4 +1,5 @@
 <?php
+
 session_start();
 require "ConnDb.php";
 
@@ -41,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($uploadOk) {
-            // print_r($_POST);
+            print_r($_POST);
 
             $idGebruiker = $_SESSION['idGebruiker'];
             $advertentie_naam = $_POST['naam'];
@@ -52,7 +53,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //in de db staat de date altijd omgekeerd. drm dit 
             if (!empty($automatische_verwijdering)) {
-                $reverse_date = date("Y-m-d", strtotime($automatische_verwijdering));
+                // Omzetten van ISO 8601 formaat naar MySQL DATETIME formaat
+                $reverse_date = date("Y-m-d H:i:s", strtotime($automatische_verwijdering));
             } else {
                 $reverse_date = null;
             }
@@ -119,21 +121,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt2->execute();
 
             } else {
-                echo "Geen categorieën geselecteerd.";
+                echo "ERROR Geen categorieën geselecteerd.";
+                exit();
             }
 
         } else {
-            echo "Geen geldige bestanden";
+            echo "ERROR Geen geldige bestanden";
             exit();
         }
 
     } else {
-      echo "Upload minimaal 1 bestand";
+      echo "ERROR Upload minimaal 1 bestand";
       exit();
     }
 
 } else {
-    echo "Niet een volledig formulier";
+    echo "ERROR Niet een volledig formulier";
     exit();
 }
 ?>

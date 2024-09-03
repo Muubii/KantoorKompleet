@@ -6,10 +6,10 @@
     <title>Chat System</title>
     <link rel="stylesheet" href="css/chat.css">
     <link rel="icon" href="images/logoSmall.svg" type="image/icon type">
-    <link rel="stylesheet" href="css/advertentie.css">
+    
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/header.js"></script>
+
 </head>
 <body>
 
@@ -19,9 +19,12 @@
                 <img src="images/logo.svg" alt="logoKantoorCompleet" class="logo" onclick="location.href='/'">
                 <p class="logoTekst">Kantoor Compleet</p>
             </div>
+
             <nav class="headerNav">
-                <button id="chatbtn"><img src="images/icons/chatIcon.svg" alt="icon" class="navIcon">Berichten</button>
-                <button id="plaatsaddbtn"><img src="images/logoSmall.svg" alt="icon" class="navIcon">Nieuwe Advertentie</button>
+                <button id="hamburgerMenu"><img src="images/icons/hamburgericon.svg" class="icon" alt="icon"></button>
+                <button id="chatbtn" class="navBtn btnIcon"><img src="images/icons/chatIcon.svg" alt="icon" class="icon">Berichten</button>
+                <button id="plaatsaddbtn" class="navBtn btnIcon"><img src="images/logoSmall.svg" alt="icon" class="icon">Nieuwe advertentie</button>
+                <button id="mijnaddbtn" class="navBtn btnIcon"><img src="images/icons/mijnadvertentiesicon.svg" alt="icon" class="icon">Mijn advertenties</button>
                 <div class="user_acc">
                     <div class="usericonbox"><img src="images/icons/personIcon.svg" class="personIcon"></div>
                     <div class="usermenubox">
@@ -34,6 +37,7 @@
             </nav>
         </div>
     </header>
+
     <main>
 <!-- <input id="menu__toggle" type="checkbox" /> -->
 <label class="menu__btn" for="menu__toggle">
@@ -62,6 +66,7 @@
     </div>
 </div>
 
-<script src="js/chat.js"></script>
+<script src="js/header.js"></script>
+<!-- <script src="js/chat.js"></script> -->
 </body>
 </html>
