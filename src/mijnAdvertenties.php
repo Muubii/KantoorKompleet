@@ -54,9 +54,7 @@
             FROM advertentie
             INNER JOIN afbeeldingen USING (idadvertentie)
             WHERE advertentie.idgebruiker = ". $idgebruiker ." AND afbeeldingen.`order` = '1'
-            ORDER BY automatischeverwijdering desc;"
-            
-            ;
+            ORDER BY automatischeverwijdering desc;";
 
                     
 
@@ -82,7 +80,13 @@
                     $logolocatie = $row['afbeeldinglocatie'];
                     $verwijderdatum = $row['verwijderdatum'];
                     $currentDate = date('Y-m-d H:i:s');
-                    $class = ($currentDate > $verwijderdatum) ? 'Gray' : '';
+                    $class = null;
+                    if ($verwijderdatum != "") {
+                        $class = ($currentDate > $verwijderdatum) ? 'Gray' : '';  // Geen backticks hier
+                    } else {
+                        $class = "";
+                    }
+                    
 
                     if($class == "Gray" && $firsttime){
                         $firsttime = false;

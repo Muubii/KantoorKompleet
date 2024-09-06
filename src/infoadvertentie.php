@@ -11,6 +11,7 @@
                             advertentie.beschrijving as beschrijving,
                             advertentie.idGebruiker as idgebruiker,
                             advertentie.idadvertentie as id,
+                            advertentie.automatischeverwijdering as verwijderdatum,
     
                             gebruiker.Bedrijfsnaam as bedrijfsnaam,
                             gebruiker.mail as mail,
@@ -58,6 +59,7 @@
                 $beschrijving = $row['beschrijving'];
                 $id_gebruiker = $row['idgebruiker'];
                 $bedrijfsnaam = $row['bedrijfsnaam'];
+                $verwijderdatum = $row['verwijderdatum'];
                 $id_advertentie = $row['id'];
     
                 $telefoon = $row['telefoon'];
@@ -113,7 +115,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
-    <title>Document</title>
+    <link rel="stylesheet" href="css/advertentieinfo.css">
+    <title>Advertentie bewerken</title>
 </head>
 <body>
 <header>
@@ -139,22 +142,74 @@
                 </div>
             </nav>
         </div>
-    </header>
-    <main>
-        <div class="advertentieInfoBox">
-            <div class="afbeeldingenBox">
-                <div class="mainImage"></div>
-                <div class="allImages">
-                    <?php
-                    foreach($locaties as $afbeeldingslocatie){
-                        echo '<img src= afbeeldingenUsers/'.$afbeeldingslocatie.'>';
-                    }
-                    ?>
-                </div>
+</header>
 
+
+<main>
+    <div class="advertentieInfoBox">
+        <div class="afbeeldingenBox">
+            <div class="mainImageBox">
+                <img class="mainImage">
+            </div>
+            <div class="allImagesBox">
+                <?php
+
+                $aantalFotosAdvertentie = count($locaties);
+                foreach($locaties as $afbeeldingslocatie){
+                    echo '<div class="advertentieAfbeeldingBox">
+                            <img src= afbeeldingenUsers/'.$afbeeldingslocatie.' class="advertentieAfbeelding">
+
+                        </div>';
+                }
+                                            // <div class="tile" style="order: 1;"><span class="noselect orderNumber">1</span></div>
+                if($aantalFotosAdvertentie < 10){
+                    for($i = 0; $i < 10-$aantalFotosAdvertentie; $i++){
+                        echo '<div class="advertentieAfbeeldingBox"></div>';
+                    }
+                }
+                ?>
+            </div>
+
+        </div>
+            <div class="InfoadvertentieBox">
+                <div class="naam infoBox">
+                    <label for="">Naam:</label>
+                    <?php
+                      echo "<input value='". $naam_advertentie ."' disabled ='true' class='infoInput' name='naamAdvertentie'>";
+                    ?>
+                    <button class="bewerkInfoBtn"><img src="images/icons/editteksticon.svg" class="icon"></button>
+                </div>
+                <div class="verwijderdatum infoBox">
+                <label for="">Verwijderdatum:</label>
+                    <?php
+                    echo "<input type='datetime-local' value='". $verwijderdatum ."' disabled ='true' class='infoInput' name='verwijderDatum'>";
+
+                    ?>
+                    <button class="bewerkInfoBtn"><img src="images/icons/editteksticon.svg" class="icon"></button>                     
+                </div>
+                <div class="prijs infoBox">
+                <label for="">Prijs: €</label>
+                    <?php
+                      echo "<input value='". $prijs ."' disabled ='true' class='infoInput geldInput' name='prijs'>";
+                    ?>
+                    <button class="bewerkInfoBtn"><img src="images/icons/editteksticon.svg" class="icon"></button>                     
+                </div>
+                <div class="biedenvanaf infoBox">
+                <label for="">bieden vanaf: €</label>
+                    <?php
+                        echo "<input value='". $bieden_vanaf ."' disabled ='true' class='infoInput geldInput' name='biedenVanaf'>";
+                    ?>
+                    <button class="bewerkInfoBtn"><img src="images/icons/editteksticon.svg" class="icon"></button>
+                </div>
+                <div class="beschrijving infoBox">
+                    <label for="">Beschrijving:</label>
+                    <textarea disabled ="true" class='infoInput beschrijvingsInput' name='beschrijving'><?php echo $beschrijving;?></textarea>
+                    <button class="bewerkInfoBtn"><img src="images/icons/editteksticon.svg" class="icon"></button>
+                </div>
             </div>
             <div class="biedingsBox">
-                <div class="bieding"></div>
+            <fieldset>
+                <legend>Biedingen</legend>
                 <?php
                     $stmt = $conn->prepare($sql4);
                     $stmt->execute();
@@ -164,24 +219,35 @@
                             $bedrijsnaam = $row['Bedrijfsnaam'];
                             $prijs = str_replace(".",",",''.$row['prijs'].'');
                             $logolocatie = $row['logolocatie'];
-                            echo"<div class='bieding'><div class= 'bedrijfsnaam'>".
-                                    "<img src='afbeeldingenUsers/profielIcons/$logolocatie' class='biedingBedrijfIcons'>
-                                    <p>".$bedrijsnaam."</p>
-                                </div>
-                                    <div class='prijs'>".'€ '.$prijs."</div>
-                                    <button id='startChatBtn'><img src='images/icons/chaticon.svg'></button>
+                            echo"<div class='bieding'>
+                                    <div class= 'bedrijfsnaam'>".
+                                        "<img src='afbeeldingenUsers/profielIcons/$logolocatie' class='biedingBedrijfIcons'>
+                                        <p>".$bedrijsnaam."</p>
+                                    </div>
+                                    <div class='geldEnChatBox'>
+                                        <p class='prijs'>".'€'.$prijs."</p>
+                                        <button class='startChatBtn'><img src='images/icons/chaticon.svg' class='startChatIcon'></button>
+                                    </div>
                                 </div>";
                         }
+                    } else{
+                        echo "geen biedingen op dit moment";
                     }
                 ?>
+            </fieldset>
+            </div>
+            <div class="update-verwijderBtnsBox">
+                <button id="verwijderAdvertentieBtn">Verwijder advertentie</button>
+                <button id="UpdateAdvertentieBtn">Update advertentie</button>                
+            </div>
 
+    </div>
+</main>
 
-                </div>
-            <button id="verwijderAdvertentieBtn">verwijder advertentie</button>
-        </div>
-    </main>
-    
-    <script src="js/header.js"></script>
-    <script src="js/advertentieinfo.js"></script>
+<script src="js/geldinput.js"></script>
+<script src="js/header.js"></script>
+<script src="js/advertentieinfo.js"></script>
+<script src="js/sorteblegrid.js"></script>
+
 </body>
 </html>

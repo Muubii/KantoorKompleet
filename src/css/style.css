@@ -22,7 +22,9 @@ input,
 textarea {
     border: 1px solid black;
     padding: 5px;
+    resize: none;
 }
+
 
 input:focus,
 textarea:focus {
@@ -55,4 +57,9 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.icon {
+    height: 25px;
+    pointer-events: none;
 }

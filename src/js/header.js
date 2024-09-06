@@ -1,7 +1,21 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    //als je op de profilebox klikt komt er een menu uit.
     const profilebox = document.querySelector(".user_acc");
+    selectBedrijfsIcon();
+    function selectBedrijfsIcon(){
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            if(xhr.responseText){
+                profilebox.querySelector(".personIcon").src = "afbeeldingenUsers/profielIcons/" + xhr.responseText;
+                profilebox.querySelector(".personIcon").classList.add("UserIcon");
+                profilebox.querySelector(".usericonbox").classList.add("HasUsericon");
+            }
+        }
+        xhr.open("POST", "database verzoeken/selectBedrijfsicon.php");
+        xhr.send();
+    }
+    //als je op de profilebox klikt komt er een menu uit.
+
     profilebox.onclick = function () {
         profilebox.classList.add("open");
     }
