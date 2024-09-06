@@ -11,7 +11,7 @@ $result = $stmt->get_result();
 
 while ($row = $result->fetch_assoc()) {
     $bericht = $row['bericht'] ?? ''; // Use an empty string if 'bericht' is null
-    echo "<div><strong>" . ($row['isverkooper'] ? "Seller" : "Bieder") . ":</strong> " . htmlspecialchars($bericht, ENT_QUOTES, 'UTF-8') . "</div>";
+    echo '<div class="' . ($row['isverkooper'] ? 'chat-bubble' : 'chat-bubble2') . '"><strong>' . '</strong> ' . htmlspecialchars($bericht, ENT_QUOTES, 'UTF-8') . '</div>';
 }
 
 $stmt->close();

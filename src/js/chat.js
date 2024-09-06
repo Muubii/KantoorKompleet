@@ -24,8 +24,6 @@ function createChat() {
     xhr.send(data);
 }
 
-// document.querySelector('.container').classList.toggle('menu-open', this.checked);
-
 let idchat = document.getElementById('idchat').value;
 let isverkooper = document.getElementById('isverkooper').value;
 

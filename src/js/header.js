@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
     const chatBtn = document.querySelector("#chatbtn");
     chatBtn.onclick = function () {
-        window.location.href = "/chat.html";
+        window.location.href = "/chat.php";
     }
     const plaatsaddbtn = document.querySelector("#plaatsaddbtn");
     plaatsaddbtn.onclick = function () {
