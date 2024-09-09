@@ -11,11 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
         mainImage.style.width = "100%";
         mainImage.style.height = "auto";
     }
-    const allImages = Array.from(allImagesBox.querySelectorAll("img"));
+    const allImages = Array.from(allImagesBox.querySelectorAll(".tile"));
     console.log(allImages)
-    allImages.forEach(img => {
-        img.onclick = function(){
-            mainImage.src = img.src;
+    allImages.forEach(tile => {
+        tile.onmouseenter = tile.ontoutch = function(){
+            console.log("geklikt");
+            const img = tile.querySelector('img');
+            if(img){
+                            mainImage.src = img.src;
             if(img.height > img.width){
                 mainImage.style.height = "100%";
                 mainImage.style.width = "auto";
@@ -23,6 +26,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 mainImage.style.width = "100%";
                 mainImage.style.height = "auto";
             }
+            }
+
         }
     });
     
@@ -74,16 +79,31 @@ document.addEventListener('DOMContentLoaded', function() {
         var url = new URL(url_string);
         var idadvertentie = url.searchParams.get("id");
 
+        const orderImages = {};
+        const tiles = Array.from(document.querySelectorAll('.tile'));
+        tiles.forEach(tile => {
+            let image = tile.querySelector('.advertentieAfbeelding');
+            if(image){
+                let imageSrc = image.src;
+                console.log(imageSrc)
+                let imageName = imageSrc.split("/").pop();
+                orderImages[imageName] = tile.style.order;
+            }
+        });
 
+        advertentieInfo.append('id', idadvertentie);
         advertentieInfo.append('naam',advertentieNaam);
         advertentieInfo.append('prijs',prijs);
         advertentieInfo.append('biedenvanaf',biedenVanaf); 
         advertentieInfo.append('verwijderdatum',verwijderdatum);
         advertentieInfo.append('beschrijving',beschrijving);
-        advertentieInfo.append('id', idadvertentie);
+        advertentieInfo.append('order', JSON.stringify(orderImages));
+        
+
         xhr = new XMLHttpRequest()
         xhr.onload = function(){
             console.log(xhr.responseText);
+            alert("Advertentie succesvol geupdate");
         }
         xhr.open("POST", "database verzoeken/updateAdvertentie.php")
         xhr.send(advertentieInfo)

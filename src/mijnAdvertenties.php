@@ -82,7 +82,7 @@
                     $currentDate = date('Y-m-d H:i:s');
                     $class = null;
                     if ($verwijderdatum != "") {
-                        $class = ($currentDate > $verwijderdatum) ? 'Gray' : '';  // Geen backticks hier
+                        $class = ($currentDate > $verwijderdatum) ? 'Gray' : '';
                     } else {
                         $class = "";
                     }
@@ -91,15 +91,16 @@
                     if($class == "Gray" && $firsttime){
                         $firsttime = false;
                         echo "<div>";
-                            echo "<h4>Automatisch Verwijderde advertenties<h4>";
+                            echo "<h4>Automatisch Verwijderde advertenties</h4>";
                             echo "<hr>";
+                            echo "<button id='verwijderVerwijderdeAdvertentieBtn'><img src='images/icons/deleteicon.svg' class='icon'>Verwijder Alles</button>";
                         echo "</div>";
 
                     }
 
 
 
-                    echo "<div class='advertentiebox ".$class."' advertentieId='$id_advertentie'>";
+                    echo "<div class='advertentiebox ".$class."' data-advertentieId='$id_advertentie'>";
                     echo "<img src='afbeeldingenUsers/".$logolocatie."' class='advertentieafbeelding'>";
                     echo "<div class='advertentieContent'>";
                         echo "<h4 class='advertentieNaam'>".$naam_advertentie."</h4>";
@@ -110,7 +111,7 @@
                 
                 }
             }else{
-                echo "Nope";
+                echo "Geen advertenties geplaatst";
             }
 
 

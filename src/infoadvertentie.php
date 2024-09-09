@@ -1,10 +1,38 @@
 <?php
     require "php/checkSession.php";
     require "database verzoeken/ConnDb.php";
+    $idGebruiker = $_SESSION['idGebruiker'];
 
-    if(isset($_GET['id']) && !empty($_GET['id'])){
-        if(is_numeric($_GET['id'])){
-            $idadvertentie = $_GET['id'];
+    $id_advertentie = $_GET['id'];
+
+    if(isset($id_advertentie) && !empty($id_advertentie)){
+        if(is_numeric($id_advertentie)){
+
+            $sql0 = "SELECT idadvertentie 
+                    FROM advertentie
+                    WHERE idadvertentie = $id_advertentie;";
+
+            $stmt = $conn->prepare($sql0);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            $idadvertenties = [];
+            if($result->num_rows > 0){
+                while($row = $result->fetch_assoc()){
+                array_push($idadvertenties, $row['idadvertentie']);
+                };
+            }
+
+        if (!in_array($id_advertentie, $idadvertenties)) {
+            header("Location: mijnadvertenties.php");
+            exit();
+        }
+
+
+
+
+
+
             $sql1 = "SELECT advertentie.Naam as naamadvertentie,
                             advertentie.Prijs as prijs,
                             advertentie.biedenvanaf as biedenvanaf,
@@ -21,14 +49,14 @@
                             gebruiker.websitelink as websitelink
                     FROM advertentie
                     INNER JOIN gebruiker on gebruiker.idgebruiker = advertentie.idgebruiker
-                    WHERE idadvertentie =". $idadvertentie .";";
+                    WHERE idadvertentie =". $id_advertentie .";";
                     
     
     
                     $sql2 = "SELECT afbeeldingen.afbeeldingLocatie AS locatie,
                                     afbeeldingen.`order` AS orderimages
                             FROM afbeeldingen
-                            WHERE idadvertentie = $idadvertentie
+                            WHERE idadvertentie = $id_advertentie
                             GROUP BY afbeeldingen.`order`;";
                                     
                      
@@ -36,7 +64,7 @@
             $sql3 = "SELECT categorie.naam as naamcategorie
                      FROM advertentieCategorieën
                      INNER JOIN categorie on categorie.idcategorie = advertentieCategorieën.idcategorie
-                     WHERE idadvertentie =". $idadvertentie .";";
+                     WHERE idadvertentie =". $id_advertentie .";";
             
     
         
@@ -44,7 +72,7 @@
                     FROM biedingen
                     INNER JOIN gebruiker
                     USING (idGebruiker)
-                    WHERE idadvertentie = $idadvertentie
+                    WHERE idadvertentie = $id_advertentie
                     ORDER BY biedingen.prijs DESC;
            ";
 
@@ -60,7 +88,6 @@
                 $id_gebruiker = $row['idgebruiker'];
                 $bedrijfsnaam = $row['bedrijfsnaam'];
                 $verwijderdatum = $row['verwijderdatum'];
-                $id_advertentie = $row['id'];
     
                 $telefoon = $row['telefoon'];
                 $mail = $row['mail'];
@@ -68,7 +95,8 @@
                 $bedrijfslocatie = $row['bedrijfslocatie'];
                 $logolocatie = $row['logolocatie'];
             }else{
-                echo "de advertentie bestaat niet";
+                header("Location: mijnadvertenties.php");
+                exit();
             }
     
             $stmt = $conn->prepare($sql2);
@@ -80,7 +108,9 @@
                     array_push($locaties, $row['locatie']);
                 }
             }else{
-                echo "de advertentie bestaat niet";
+                header("Location: mijnadvertenties.php");
+                exit();
+                
             }
     
             $stmt = $conn->prepare($sql3);
@@ -92,16 +122,18 @@
                     array_push($naam_categorie, $row['naamcategorie']);
                 };
             }else{
-                echo "de advertentie bestaat niet";
+                header("Location: mijnadvertenties.php");
+                exit();
             }
     
     
     
-    
-    
         }
+    
+        
     }else{
-        echo "Geen geldige advertentie";
+        header("Location: mijnadvertenties.php");
+        exit();
     }
 
 
@@ -116,6 +148,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/header.css">
     <link rel="stylesheet" href="css/advertentieinfo.css">
+    <link rel="stylesheet" href="css/sorteblegrid.css">
     <title>Advertentie bewerken</title>
 </head>
 <body>
@@ -147,29 +180,28 @@
 
 <main>
     <div class="advertentieInfoBox">
-        <div class="afbeeldingenBox">
-            <div class="mainImageBox">
-                <img class="mainImage">
-            </div>
-            <div class="allImagesBox">
-                <?php
+        <div class="afbeeldingenBoxWrapper">
+            <div class="afbeeldingenBox">
+                <div class="mainImageBox">
+                    <img class="mainImage">
+                </div>
+                <div class="allImagesBox">
+                    <?php
 
-                $aantalFotosAdvertentie = count($locaties);
-                foreach($locaties as $afbeeldingslocatie){
-                    echo '<div class="advertentieAfbeeldingBox">
-                            <img src= afbeeldingenUsers/'.$afbeeldingslocatie.' class="advertentieAfbeelding">
-
-                        </div>';
-                }
-                                            // <div class="tile" style="order: 1;"><span class="noselect orderNumber">1</span></div>
-                if($aantalFotosAdvertentie < 10){
-                    for($i = 0; $i < 10-$aantalFotosAdvertentie; $i++){
-                        echo '<div class="advertentieAfbeeldingBox"></div>';
+                    $aantalFotosAdvertentie = count($locaties);
+                    foreach($locaties as $index => $afbeeldingslocatie){
+                        echo '<div class="tile" style="order: '.($index + 1).';"><img src="afbeeldingenUsers/'.$afbeeldingslocatie.'" class="advertentieAfbeelding"><span class="noselect orderNumber">'.($index + 1).'</span></div>';
                     }
-                }
-                ?>
-            </div>
+                    if($aantalFotosAdvertentie < 10){
+                        for($i = $aantalFotosAdvertentie+1; $i <= 10; $i++){
+                            echo '<div class="tile" style="order: '.$i.';"><span class="noselect orderNumber">'.$i.'</span></div>';
+                        }
+                    }
+                    echo '<div class="placeholder-tile" style="order: 10;"></div>';
+                    ?>
+                </div>
 
+            </div>
         </div>
             <div class="InfoadvertentieBox">
                 <div class="naam infoBox">
@@ -246,8 +278,8 @@
 
 <script src="js/geldinput.js"></script>
 <script src="js/header.js"></script>
-<script src="js/advertentieinfo.js"></script>
-<script src="js/sorteblegrid.js"></script>
 
+<script src="js/sorteblegrid.js"></script>
+<script src="js/advertentieinfo.js"></script>
 </body>
 </html>

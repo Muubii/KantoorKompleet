@@ -6,9 +6,22 @@ document.addEventListener("DOMContentLoaded", () => {
         const xhr = new XMLHttpRequest();
         xhr.onload = function(){
             if(xhr.responseText){
-                profilebox.querySelector(".personIcon").src = "afbeeldingenUsers/profielIcons/" + xhr.responseText;
-                profilebox.querySelector(".personIcon").classList.add("UserIcon");
-                profilebox.querySelector(".usericonbox").classList.add("HasUsericon");
+                const response = JSON.parse(xhr.responseText);
+                console.log(response)
+                const {logolocatie, Bedrijfsnaam} = response;
+                if(logolocatie){
+                    profilebox.querySelector(".personIcon").src = "afbeeldingenUsers/profielIcons/" + logolocatie;
+                    profilebox.querySelector(".personIcon").classList.add("UserIcon");
+                    profilebox.querySelector(".usericonbox").classList.add("HasUsericon");
+                }
+
+
+                const bedrijfsnaamBox = document.createElement("a");
+                bedrijfsnaamBox.classList.add('bedrijfsnaam');
+                bedrijfsnaamBox.innerHTML = "<img src='images/icons/personIcon.svg' class='icon'>" + Bedrijfsnaam;
+                bedrijfsnaamBox.href = "profiel.php"
+                const header = document.querySelector(".headerNav");
+                header.insertBefore(bedrijfsnaamBox, header.lastElementChild);
             }
         }
         xhr.open("POST", "database verzoeken/selectBedrijfsicon.php");
@@ -110,5 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+
     window.addEventListener('resize', updateFiltersPosition);
 })

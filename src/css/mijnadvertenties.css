@@ -65,8 +65,20 @@ main {
 
 .Gray {
     filter: grayscale(100%) brightness(70%);
-    background-color: #f0f0f0; /* Lichtere achtergrondkleur voor een uitgeschakelde uitstraling */
-    border: 1px solid #ddd;    /* Dunnere rand om de uitgeschakelde uitstraling te versterken */
-    opacity: 0.6;             /* Verminderde opaciteit voor een 'uitgeschakelde' look */
-    pointer-events: none;     /* Voorkom dat gebruikers met de muis op de uitgeschakelde advertenties klikken */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    opacity: 0.6;
+}
+
+#verwijderVerwijderdeAdvertentieBtn{
+    padding: 10px;
+    border: 1px solid black;
+    background-color: white;
+    margin-top: 10px;
+    float: right;
+    display: flex;
+    gap: 5px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
