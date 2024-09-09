@@ -24,7 +24,7 @@
       echo "Same";
       exit();
     }
-    $prijs = str_replace(',', '.', $_POST['prijs']);
+    $prijs = $_POST['prijs'];
 
     $stmt = $conn->prepare("INSERT INTO biedingen (idadvertentie, prijs, idGebruiker) VALUES (?, ?, ?)");
     $stmt->bind_param("idi", $idadvertentie, $prijs, $idGebruiker);

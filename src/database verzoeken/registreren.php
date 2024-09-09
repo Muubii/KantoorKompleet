@@ -3,26 +3,30 @@
     require "ConnDb.php";
 
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
 
     $Bedrijfsnaam = $_POST['Bedrijfsnaam'];
     $myname = $_POST['Gebruikersnaam'];
     $mypassword = $_POST['Wachtwoord'];
     
     $hashedpassword = password_hash($mypassword, PASSWORD_DEFAULT);
-    $stmt1 = $conn->prepare("SELECT idGebruiker FROM gebruiker WHERE Bedrijfsnaam = ?");
+    // Prepare SQL statement
+    $stmt1 = $conn->prepare("SELECT (Bedrijfsnaam) FROM gebruiker WHERE Bedrijfsnaam = ?");
     $stmt1->bind_param("s", $Bedrijfsnaam);
+
     $stmt1->execute();
     $result = $stmt1->get_result();
-
-
     if($result->num_rows == 0){
         $stmt2 = $conn->prepare("INSERT INTO gebruiker (Bedrijfsnaam, Gebruikersnaam, Wachtwoord) VALUES (?, ?, ?)");
+        // Bind parameters to the SQL statement
         $stmt2->bind_param("sss", $Bedrijfsnaam, $myname, $hashedpassword);
+
+        // Execute the SQL statement
         if ($stmt2->execute()) {
+            header("location: /login.html");
             exit();
         } else {
-            echo "Error: " . $stmt2->error;
+            echo "Error: " . $stmt->error;
         }
     }else{
         echo "Bedrijfsnaam is al in bezet";
