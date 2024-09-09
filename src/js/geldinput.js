@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function(event) {
     const invoervelden = document.querySelectorAll('.geldInput');
-
+console.log(invoervelden)
     invoervelden.forEach(function(invoer) {
 
         invoer.addEventListener('input', function() {

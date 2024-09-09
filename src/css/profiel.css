@@ -186,4 +186,9 @@ form {
         grid-template-columns: auto;
         grid-template-rows: auto auto;
     }
+
+    #bedrijfslogo {
+        width: 80%;
+        height: min-content;
+    }
 }

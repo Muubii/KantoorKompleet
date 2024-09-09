@@ -2,7 +2,7 @@
 session_start();
 require "ConnDb.php";
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Bedrijfsnaam = $_POST['Bedrijfsnaam'];
     $mypassword = $_POST['Wachtwoord'];
 
@@ -17,8 +17,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $idGebruiker = $user['idGebruiker'];
             $_SESSION['idGebruiker'] = $idGebruiker;
             $_SESSION['Bedrijfsnaam'] = $Bedrijfsnaam;
-            header("Location: /index.php");
-            exit();
     } else {
         echo "Ongeldige gebruikersnaam of wachtwoord.";
     }
