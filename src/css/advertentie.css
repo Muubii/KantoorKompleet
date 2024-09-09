@@ -17,7 +17,7 @@ main {
   display: grid;
   grid-template-columns: auto max-content;
   width: 80vw;
-  height: 100%;
+  overflow: hidden;
 }
 
 #main-image {
@@ -148,9 +148,11 @@ main {
 }
 
 .advertentieinfo .bid-section {
+  height: 100%;
   margin-top: 20px;
   border: 1px solid #e5e5e5;
   padding: 10px;
+  
 }
 
 .advertentieinfo .bid-section input {
@@ -190,6 +192,11 @@ main {
   height: 20px;
 }
 
+#biedingenBox{
+  max-height: 150px;
+  height: min-content;
+  overflow-y: scroll;
+}
 .bieding {
   display: grid;
   grid-template-columns: auto auto;
@@ -245,6 +252,10 @@ main {
   .container {
     grid-template-columns: auto;
     min-width: none;
+  }
+
+  #biedingenBox{
+    max-height: 300px;
   }
 
   .advertentieinfo {

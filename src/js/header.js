@@ -1,7 +1,34 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    //als je op de profilebox klikt komt er een menu uit.
     const profilebox = document.querySelector(".user_acc");
+    selectBedrijfsIcon();
+    function selectBedrijfsIcon(){
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            if(xhr.responseText){
+                const response = JSON.parse(xhr.responseText);
+                console.log(response)
+                const {logolocatie, Bedrijfsnaam} = response;
+                if(logolocatie){
+                    profilebox.querySelector(".personIcon").src = "afbeeldingenUsers/profielIcons/" + logolocatie;
+                    profilebox.querySelector(".personIcon").classList.add("UserIcon");
+                    profilebox.querySelector(".usericonbox").classList.add("HasUsericon");
+                }
+
+
+                const bedrijfsnaamBox = document.createElement("a");
+                bedrijfsnaamBox.classList.add('bedrijfsnaam');
+                bedrijfsnaamBox.innerHTML = "<img src='images/icons/personIcon.svg' class='icon'>" + Bedrijfsnaam;
+                bedrijfsnaamBox.href = "profiel.php"
+                const header = document.querySelector(".headerNav");
+                header.insertBefore(bedrijfsnaamBox, header.lastElementChild);
+            }
+        }
+        xhr.open("POST", "database verzoeken/selectBedrijfsicon.php");
+        xhr.send();
+    }
+    //als je op de profilebox klikt komt er een menu uit.
+
     profilebox.onclick = function () {
         profilebox.classList.add("open");
     }
@@ -96,5 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     }
+
     window.addEventListener('resize', updateFiltersPosition);
 })

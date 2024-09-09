@@ -32,6 +32,9 @@
         $stmt = $conn->prepare('DELETE FROM advertentieCategorieën WHERE idadvertentie = ?');
         $stmt->execute([$idAdvertentie]);
 
+        $stmt = $conn->prepare('DELETE FROM berichten WHERE idchat IN (SELECT idchat FROM chat WHERE idadvertentie = ?)');
+        $stmt->execute([$idAdvertentie]);
+
         $stmt = $conn->prepare('DELETE FROM chat WHERE idadvertentie = ?');
         $stmt->execute([$idAdvertentie]);
 

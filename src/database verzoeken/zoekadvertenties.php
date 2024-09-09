@@ -73,7 +73,11 @@ if (strlen($advertentieNaam) > 18) {
             echo "<div class='advertentie' advertentieId=".$row['id'].">";
                 echo "<img class='advertentieImg'src='afbeeldingenUsers/" . $row['locatie'] . "'>";
                 echo "<div class='advertentieinfo'>";
+                if(!empty($afbeeldingLocatie)){
                     echo "<img src='afbeeldingenUsers/profielicons/".$afbeeldingLocatie."' class='bedrijfslogo'>";
+                } else{
+                    echo '<img src="images/icons/personIcon.svg" class="bedrijfslogo">';
+                }
                     echo "<p>" . $advertentieNaam . "</p>";
                     echo "<p class='prijs'>" ."€ ". str_replace(".",",",''.$row['prijs'].'') . "</p>";
                 echo "</div>";

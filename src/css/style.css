@@ -22,7 +22,9 @@ input,
 textarea {
     border: 1px solid black;
     padding: 5px;
+    resize: none;
 }
+
 
 input:focus,
 textarea:focus {
@@ -55,4 +57,30 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+.icon {
+    height: 25px;
+    pointer-events: none;
+}
+
+/* WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+    border: 2px solid #f1f1f1;
+}
+
+/* Firefox */
+html {
+    scrollbar-width: thin;
+    scrollbar-color: black #f1f1f1;
 }

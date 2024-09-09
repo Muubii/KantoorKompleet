@@ -19,7 +19,7 @@
     </header>
     <main class="mainPageContent">
         <div class="login-container">
-            <form class="registration-form" action="database verzoeken/registreren.php" method="POST">
+            <form class="registration-form" id ="registreer">
                 <h1>Registreren</h1>
 
                 <div class="form-field">
@@ -28,13 +28,13 @@
                 </div>
 
                 <div class="form-field">
-                    <label for="Gebruikersnaam">Gebruikersnaam:</label>
-                    <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer hier uw gebruikersnaam in" required>
+                    <label for="Gebruikersnaam">Gebruikersnaam:</label> 
+                    <input type="text" id="Gebruikersnaam" name="Gebruikersnaam" placeholder="Voer hier uw gebruikersnaam in" required value="">
                 </div>
                 
                 <div class="form-field">
                     <label for="Wachtwoord">Wachtwoord:</label>
-                    <input type="password" id="Wachtwoord" name="Wachtwoord" placeholder="Voer hier uw wachtwoord in" required>
+                    <input type="password" id="Wachtwoord" name="Wachtwoord" placeholder="Voer hier uw wachtwoord in" required value="">
                     <a href="login.html">login</a>
                 </div>
 
@@ -43,4 +43,5 @@
         </div>
     </main>
 </body>
+<script src="js/login.js"></script>
 </html>
