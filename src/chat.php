@@ -67,6 +67,8 @@ $stmt->execute();
 $stmt->bind_result($verkoperId, $verkoperNaam, $biederId, $biederNaam);
 $stmt->fetch();
 $stmt->close();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -149,7 +151,8 @@ $stmt->close();
         </div>
     </main>
 
-<script src="js/chat.js"></script>
+<!-- <script src="js/chat.js"></script> -->
 <script src="js/header.js"></script>
-</body>
+<script src="js/chatSendMessage.js"></script>
+</body>  
 </html>

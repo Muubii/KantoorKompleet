@@ -70,7 +70,8 @@ body {
 }
 
 .chat-bubble {
-  width: 200px;
+  width: auto;
+  max-width: 50v0px;
   height: auto;
   background-color: #000;
   border-radius: 0px 50px 50px 50px;
@@ -81,11 +82,28 @@ body {
   align-items: center;
   word-wrap: break-word;
   margin-top: 2vh;
-  
 }
 
+
+.chat-bubble {
+width: max-content;
+max-width: 500px; 
+height: auto;
+background-color: #000;
+border-radius: 0px 50px 50px 50px;
+align-self: flex-start;
+color: white;
+padding: 10px;
+display: flex;
+align-items: center;
+word-wrap: break-word;
+margin-top: 2vh;
+}
+
+
 .chat-bubble2 {
-  width: 200px;
+  width: max-content;
+  max-width: 500px; 
   height: auto;
   background-color: #000;
   border-radius: 50px 0px 50px 50px;

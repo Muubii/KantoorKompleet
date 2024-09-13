@@ -3,8 +3,10 @@ session_start();
 
 include 'ConnDb.php';
 
+$currentUserId = $_SESSION['idGebruiker']; 
+
 $idchat = $_GET['idchat'];
-$currentUserId = $_SESSION['idGebruiker'];
+
 
 $query = "SELECT gebruiker.Bedrijfsnaam as gebruikerNaam, chat.bieder, chat.idchat, chat.idadvertentie, 
                  advertentie.idGebruiker, gebruiker2.Bedrijfsnaam as verkoperNaam
@@ -19,10 +21,14 @@ $stmt->bind_param("i", $idchat);
 $stmt->execute();
 $chatDetails = $stmt->get_result()->fetch_assoc();
 
-$buyerName = $chatDetails['gebruikerNaam'];
-$sellerName = $chatDetails['verkoperNaam'];
-$sellerId = $chatDetails['idGebruiker'];
-$buyerId = $chatDetails['bieder'];
+
+    $buyerName = $chatDetails['gebruikerNaam'];
+    $sellerName = $chatDetails['verkoperNaam'];
+    $sellerId = $chatDetails['idGebruiker'];
+    $buyerId = $chatDetails['bieder'];
+
+
+
 
 // Haal chatberichten op
 $sql = "SELECT * FROM berichten WHERE idchat = ? ORDER BY id";
@@ -30,6 +36,8 @@ $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $idchat);
 $stmt->execute();
 $result = $stmt->get_result();
+
+
 
 while ($row = $result->fetch_assoc()) {
     $bericht = $row['bericht'] ?? ''; // Use an empty string if 'bericht' is null
@@ -48,4 +56,7 @@ while ($row = $result->fetch_assoc()) {
     // Toon het bericht met de naam van de afzender
     echo '<div class="' . $bubbleClass . '"><strong>' . htmlspecialchars($senderName, ENT_QUOTES, 'UTF-8') . ':</strong> ' . htmlspecialchars($bericht, ENT_QUOTES, 'UTF-8') . '</div>';
 }
+
+
+
 ?>

@@ -1,8 +1,17 @@
 <?php
 include 'ConnDb.php';
 
-$idadvertentie = isset($_POST['idadvertentie']) ? $conn->real_escape_string($_POST['idadvertentie']) : '';
-$bieder = isset($_POST['bieder']) ? $conn->real_escape_string($_POST['bieder']) : '';
+
+$rawData = file_get_contents("php://input");
+
+// Decode the JSON data into a PHP array
+$data = json_decode($rawData, true);
+print_r($data);
+
+$idadvertentie = $data['advertentieId'];
+$bieder = $data["bieder"]; 
+
+$query1 ="SELECT idGebruiker FROM advertentie WHERE idadvertentie = $idadvertentie";
 
 $query = "INSERT INTO chat (idadvertentie, bieder) VALUES (?, ?)";
 $stmt = $conn->prepare($query);

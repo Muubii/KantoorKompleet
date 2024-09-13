@@ -182,7 +182,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 
             <input type="hidden" id="idadvertentie" value="<?php echo $id_advertentie; ?>">
             <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
-             <button onclick="createChat()" class="iconBtn"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
+             <button onclick="checkseller()" class="iconBtn"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
@@ -200,6 +200,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     <script src ="js/advertentie.js"></script>
     <script src="js/geldinput.js"></script>
     <script src="js/chat.js"></script>
+    
 </main>
 </body>
 </html>
