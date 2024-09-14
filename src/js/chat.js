@@ -8,13 +8,10 @@ var chatExists;
 function checkseller(){
     var xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
-        // console.log("Raw response:", xhttp.responseText); // Log the raw response
 
     const response = JSON.parse(xhttp.responseText);
 
     chatExists = response["chatExists"];
-    // console.log(chatExists); 
-    
 
     let isVerkoper = response["isVerkoper"];
     verkoperID = response["idgebruiker"];

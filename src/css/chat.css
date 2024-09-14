@@ -1,8 +1,10 @@
-/* chat.css */
-
 body {
   font-family: Arial, sans-serif;
   background-color: #888;
+}
+
+main{
+  display: flex;
 }
 
 .container {
@@ -23,13 +25,10 @@ body {
   grid-template-columns: 200px 1fr;
 }
 
-
-
 .title {
   font-size: 18px;
   font-weight: bold;
 }
-
 
 .sidebar {
   background-color: #444444;
@@ -84,7 +83,6 @@ body {
   margin-top: 2vh;
 }
 
-
 .chat-bubble {
 width: max-content;
 max-width: 500px; 
@@ -99,7 +97,6 @@ align-items: center;
 word-wrap: break-word;
 margin-top: 2vh;
 }
-
 
 .chat-bubble2 {
   width: max-content;
@@ -135,73 +132,13 @@ margin-top: 2vh;
   color: #fff;
 }
 
-/* #menu__toggle {
-  opacity: 0;
+.profile-photo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+  vertical-align: middle;
 }
-
-#menu__toggle:checked + .menu__btn > span {
-  transform: rotate(45deg);
-}
-
-#menu__toggle:checked + .menu__btn > span::before {
-  top: 0;
-  transform: rotate(0deg);
-}
-
-#menu__toggle:checked + .menu__btn > span::after {
-  top: 0;
-  transform: rotate(90deg);
-} */
-
-/* #menu__toggle:checked ~ .menu__box {
-  left: 0 !important;
-} */
-
-  /* .menu__btn {
-    position: fixed;
-    top: 200px;
-    left: 20px;
-    width: 26px;
-    height: 26px;
-    cursor: pointer;
-    z-index: 1001;
-  }
-
-  .menu__btn > span,
-  .menu__btn > span::before,
-  .menu__btn > span::after {
-    display: block;
-    position: absolute;
-    width: 80%;
-    height: 2px;
-    background-color: #616161;
-    transition-duration: .25s;
-  }
-
-  .menu__btn > span::before { */
-  /* content: '';
-  top: -8px;
-} */
-/* 
-.menu__btn > span::after {
-  content: '';
-  top: 8px;
-} */
-/* 
-.menu__box {
-  display: block;
-  position: fixed;
-  top: 20;
-  left: -200%;
-  width: 200px;
-  height: 100%;
-  margin: 0;
-  padding: 80px 0;
-  list-style: none;
-  background-color: #aaadae;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, .4);
-  transition-duration: .25s;
-} */
 
 .chatUsers{
   width: 10vh;
@@ -211,7 +148,6 @@ margin-top: 2vh;
   
 }
 
- 
 .menu__item {
   display: flex;
   padding: 30px 30px 30px;
@@ -220,7 +156,6 @@ margin-top: 2vh;
   font-size: 20px;
   font-weight: 600;
   text-decoration: none;
-  /* transition-duration: .25s; */
   background-color: #999;
   gap: 10px;
 }
@@ -228,7 +163,6 @@ margin-top: 2vh;
 .menu__item:hover {
   background-color: #CFD8DC;
 }
-
 
 .sidebar-mm{
   display: flex;
@@ -240,9 +174,4 @@ margin-top: 2vh;
   overflow-y: scroll;
   height: 95vh;
 }
-
-main{
-  display: flex;
-}
-
 

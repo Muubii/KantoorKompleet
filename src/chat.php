@@ -2,7 +2,7 @@
 include 'database verzoeken/ConnDb.php';
 include 'php/checkSession.php';
 
-$idchat = isset($_GET['idchat']) ? $conn->real_escape_string($_GET['idchat']) : '';
+$idchat = $_GET['idchat'];
 $currentUserId = $_SESSION['idGebruiker'];
 
 // cheken als deze gebruiker in de chat is
@@ -49,9 +49,9 @@ $stmt->close();
 
 // Bepalen wie de andere persoon in de chat is
 if ($isverkooper) {
-    $otherUsername = $biederNaam; // De andere persoon is de bieder
+    $otherUsername = $biederNaam;
 } else {
-    $otherUsername = $verkoperNaam; // De andere persoon is de verkoper
+    $otherUsername = $verkoperNaam;
 }
 
 $query = "SELECT advertentie.idGebruiker AS verkoperId, gebruiker1.Bedrijfsnaam AS verkoperNaam, 
@@ -135,6 +135,7 @@ if ($result->num_rows > 0) {
 $stmt->close();
 ?>
 
+
 </div>
         <div class="chat-window">
             <div class="chat-header">Chat with <span id="chatWith"><?php echo $otherUsername;?></span></div>
@@ -151,7 +152,7 @@ $stmt->close();
         </div>
     </main>
 
-<!-- <script src="js/chat.js"></script> -->
+
 <script src="js/header.js"></script>
 <script src="js/chatSendMessage.js"></script>
 </body>  
