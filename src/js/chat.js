@@ -1,72 +1,71 @@
-function createChat() {
-    var idadvertentie = document.getElementById('idadvertentie').value;
-    var bieder = document.getElementById('bieder').value;
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', 'database verzoeken/createchat.php', true); // Adjust the path if necessary
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            var idchat = xhr.responseText;
-            console.log('New chat created with ID:', idchat);
-            // Redirect to the chat page
-            window.location.href = `chat.php?idchat=${idchat}`; // Adjust the path if necessary
+var url_string = window.location.href;
+var url = new URL(url_string);
+var advertentieId = url.searchParams.get("id");
+let bieder = 1;
+let verkoperID = 0;
+var chatExists;
+
+function checkseller(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+
+    const response = JSON.parse(xhttp.responseText);
+
+    chatExists = response["chatExists"];
+
+    let isVerkoper = response["isVerkoper"];
+    verkoperID = response["idgebruiker"];
+    let chatId = response["chatId"]; 
+    verkoperID = response["idgebruiker"];
+    if(isVerkoper){
+        alert ("Je kan niet jezelf een bericht sturen.");
+    }else{
+        if (chatExists) {
+            console.log(chatExists);
+            
+            console.log("chat exist" )
+            window.location.href = `chat.php?idchat=${chatId}`;
         } else {
-            console.error('Error creating chat:', xhr.status, xhr.statusText);
+            createChat();
+            console.log("chat does not exist")
         }
-    };
-
-    xhr.onerror = function() {
-        console.error('Request failed');
-    };
-
-    var data = 'idadvertentie=' + encodeURIComponent(idadvertentie) + '&bieder=' + encodeURIComponent(bieder);
-    xhr.send(data);
-}
-
-// document.querySelector('.container').classList.toggle('menu-open', this.checked);
-
-let idchat = document.getElementById('idchat').value;
-let isverkooper = document.getElementById('isverkooper').value;
-
-function ophalenMessages() {
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', `database verzoeken/get_message.php?idchat=${idchat}`, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("chatBox").innerHTML = xhr.responseText;
-        } else if (xhr.readyState === 4) {
-            console.error('Error messages:', xhr.status, xhr.statusText);
-        }
-    };
-    xhr.send();
-}
-
-function sendMessage() {
-    let message = document.getElementById("message").value;
-    if (message.trim() === '') return;
-
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', 'database verzoeken/send_message.php', true);
-    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    xhr.onreadystatechange = function() {   
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            document.getElementById("message").value = '';
-            ophalenMessages();
-        } else if (xhr.readyState === 4) {
-            console.error('Error sending message:', xhr.status, xhr.statusText);
-        }
-    };
-    let data = `idchat=${idchat}&isverkooper=${isverkooper}&bericht=${encodeURIComponent(message)}`;
-    xhr.send(data);
-}
-
-setInterval(ophalenMessages, 1000); // refresh messages every second
-ophalenMessages(); // Initial refresh
-
-document.getElementById("send-btn").addEventListener("click", sendMessage);
-document.getElementById("message").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
     }
-});
+};
+    xhttp.open("POST", "database verzoeken/checkseller.php", true);
+    
+    xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhttp.send("advertentieId="+advertentieId); 
+}
+
+
+function createChat() {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onload = function() {
+            if (xhr.status === 200) {
+                var idchat = xhr.responseText;
+                console.log('New chat created with ID:', idchat);
+                // Redirect to the chat page
+                window.location.href = `chat.php?idchat=${idchat}`; // Adjust the path if necessary
+            } else {
+                console.error('Error creating chat:', xhr.status, xhr.statusText);
+            }
+            console.log(xhr.responseText);
+        }
+
+        let data = {
+            advertentieId: advertentieId,
+            bieder: verkoperID
+        };
+
+        
+        xhr.open("POST", "database verzoeken/createchat.php", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(data)); 
+        
+    };
+    
+
+    
+
+ 

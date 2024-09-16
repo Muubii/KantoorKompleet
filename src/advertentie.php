@@ -160,14 +160,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
         <div class="advertentieinfo">
             <div class="seller-info-box">
                 <div class="seller-name">
-                    <?php
-                    if(!empty($logolocatie)){
-                        echo '<img src="afbeeldingenUsers/profielIcons/'. $logolocatie.'" id = "logoVerkooper">';
-                    } else{
-                        echo '<img src="afbeeldingenUsers/profielIcons/'. $logolocatie.'" id = "logoVerkooper">';
-                    }
-                    
-                    ?>
+                    <img src="afbeeldingenUsers/profielIcons/<?php echo $logolocatie?>" id = "logoVerkooper">
                     <h3><?php echo $bedrijfsnaam;?></h3>
                 </div>
 
@@ -186,12 +179,10 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                     }
                     ?>
             </div>
-<!-- 
+
             <input type="hidden" id="idadvertentie" value="<?php echo $id_advertentie; ?>">
             <input type="hidden" id="bieder" value="<?php echo $_SESSION['idGebruiker']; ?>"> 
-             -->
-            
-             <button onclick="createChat()" class="iconBtn"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
+             <button onclick="checkseller()" class="iconBtn"><img src="images/icons/chatIcon.svg" class="icon">Stuur bericht</button>
             <div class="bid-section">
                 <h3>Bieden vanaf: <?php echo "€ ".$bieden_vanaf;?></h3>
                 <div id="biedingenBox"></div>
@@ -209,8 +200,8 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     <script src ="js/advertentie.js"></script>
     <script src="js/geldinput.js"></script>
     <script src="js/chat.js"></script>
+    
 </main>
 </body>
 </html>
-
 

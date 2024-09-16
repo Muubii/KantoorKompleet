@@ -2,8 +2,21 @@
 include 'database verzoeken/ConnDb.php';
 include 'php/checkSession.php';
 
+$idchat = $_GET['idchat'];
+$currentUserId = $_SESSION['idGebruiker'];
 
-$idchat = isset($_GET['idchat']) ? $conn->real_escape_string($_GET['idchat']) : '';
+// cheken als deze gebruiker in de chat is
+$query = "SELECT advertentie.idGebruiker, chat.bieder
+          FROM chat 
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie 
+          WHERE chat.idchat = ? AND (advertentie.idGebruiker = ? OR chat.bieder = ?)";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('iii', $idchat, $currentUserId, $currentUserId);
+$stmt->execute();
+$stmt->store_result();
+$stmt->close();
+
+// gebruiker of verkoper 
 $isverkooper = ($_SESSION['idGebruiker'] == get_advertentie_owner($idchat, $conn)) ? 1 : 0;
 
 function get_advertentie_owner($idchat, $conn) {
@@ -19,6 +32,43 @@ function get_advertentie_owner($idchat, $conn) {
     $stmt->close();
     return $owner_id;
 }
+
+$query = "SELECT advertentie.idGebruiker AS verkoperId, gebruiker1.Bedrijfsnaam AS verkoperNaam, 
+                 chat.bieder AS biederId, gebruiker2.Bedrijfsnaam AS biederNaam
+          FROM chat 
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
+          INNER JOIN gebruiker AS gebruiker1 ON advertentie.idGebruiker = gebruiker1.idGebruiker
+          INNER JOIN gebruiker AS gebruiker2 ON chat.bieder = gebruiker2.idGebruiker
+          WHERE chat.idchat = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('i', $idchat);
+$stmt->execute();
+$stmt->bind_result($verkoperId, $verkoperNaam, $biederId, $biederNaam);
+$stmt->fetch();
+$stmt->close();
+
+// Bepalen wie de andere persoon in de chat is
+if ($isverkooper) {
+    $otherUsername = $biederNaam;
+} else {
+    $otherUsername = $verkoperNaam;
+}
+
+$query = "SELECT advertentie.idGebruiker AS verkoperId, gebruiker1.Bedrijfsnaam AS verkoperNaam, 
+                 chat.bieder AS biederId, gebruiker2.Bedrijfsnaam AS biederNaam
+          FROM chat 
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
+          INNER JOIN gebruiker AS gebruiker1 ON advertentie.idGebruiker = gebruiker1.idGebruiker
+          INNER JOIN gebruiker AS gebruiker2 ON chat.bieder = gebruiker2.idGebruiker
+          WHERE chat.idchat = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('i', $idchat);
+$stmt->execute();
+$stmt->bind_result($verkoperId, $verkoperNaam, $biederId, $biederNaam);
+$stmt->fetch();
+$stmt->close();
+
+
 ?>
 
 <!DOCTYPE html>
@@ -55,41 +105,40 @@ function get_advertentie_owner($idchat, $conn) {
                     </div>
                 </div>
             </nav>
-
-            <form class="filter" id="filteradvertenties">
-                <div class="topOfGrid">
-                    <button class="filtericon" type="button"><img src="images\icons\filtericon.svg" alt="icon" class="icon"></button>
-                    <input type="text" placeholder="Zoeken" id="zoekInput" name="zoekInput">
-                    <div class="extraFilters">
-                        <select id="categorieënInput" name="categorieënInput">
-                        <option value="0">alle categorieën</option>
-                        </select>
-                        <input type="text" placeholder="van" id="vanPrijsInput" class="geldInput" name="vanPrijsInput">
-                        <input type="text" placeholder="tot" id="totPrijsInput" class="geldInput" name="totPrijsInput">
-                    </div>
-
-                <button type="submit" class="btnIcon"><img src="images/icons/zoekicon.svg" class="icon">zoeken</button>
-                </div>
-                <div class="bottomOfGrid"></div>
-            </form>
-
         </div>
     </header>
-    <main>
-        <input id="menu__toggle" type="checkbox" />
-        <label class="menu__btn" for="menu__toggle">
-            <span></span>
-        </label>
-        <ul class="menu__box">
-            <li><a class="menu__item" href="#">Richard</a></li>
-            <li><a class="menu__item" href="#">Nina</a></li>
-            <li><a class="menu__item" href="#">Anna</a></li>
-            <li><a class="menu__item" href="#">Sam</a></li>
-            <li><a class="menu__item" href="#">Mubi</a></li>
-        </ul>
 
+    <main>
+        <div class="sidebar-mm">
+<?php
+$query = "SELECT gebruiker.Bedrijfsnaam as gebruikerNaam, chat.bieder, chat.idchat, chat.idadvertentie, 
+                 advertentie.idGebruiker, gebruiker2.Bedrijfsnaam as verkoperNaam
+          FROM chat
+          INNER JOIN gebruiker ON chat.bieder = gebruiker.idGebruiker
+          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
+          INNER JOIN gebruiker as gebruiker2 ON advertentie.idGebruiker = gebruiker2.idGebruiker
+          WHERE chat.bieder = ? OR advertentie.idGebruiker = ?";
+
+$stmt = $conn->prepare($query);
+$currentUserId = $_SESSION['idGebruiker'];
+$stmt->bind_param('ii', $currentUserId, $currentUserId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $otherrUsername = ($row["idGebruiker"] == $currentUserId) ? $row["gebruikerNaam"] : $row["verkoperNaam"];
+        $idChat = $row["idchat"];
+        echo "<div><a class='menu__item' href='chat.php?idchat=$idChat'>$otherrUsername</a></div>";
+    }
+}
+$stmt->close();
+?>
+
+
+</div>
         <div class="chat-window">
-            <div class="chat-header">Chat with <span id="chatWith">Sam</span></div>
+            <div class="chat-header">Chat with <span id="chatWith"><?php echo $otherUsername;?></span></div>
             <div class="chat-content">
                 <div id="chatBox"></div>
             </div>
@@ -103,7 +152,8 @@ function get_advertentie_owner($idchat, $conn) {
         </div>
     </main>
 
-<script src="js/chat.js"></script>
+
 <script src="js/header.js"></script>
-</body>
+<script src="js/chatSendMessage.js"></script>
+</body>  
 </html>
