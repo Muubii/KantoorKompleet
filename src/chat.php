@@ -2,7 +2,8 @@
 include 'database verzoeken/ConnDb.php';
 include 'php/checkSession.php';
 
-$idchat = $_GET['idchat'];
+
+$idchat = $_GET['idchat'] ?? null;
 $currentUserId = $_SESSION['idGebruiker'];
 
 // cheken als deze gebruiker in de chat is
@@ -112,12 +113,12 @@ $stmt->close();
         <div class="sidebar-mm">
 <?php
 $query = "SELECT gebruiker.Bedrijfsnaam as gebruikerNaam, chat.bieder, chat.idchat, chat.idadvertentie, 
-                 advertentie.idGebruiker, gebruiker2.Bedrijfsnaam as verkoperNaam
-          FROM chat
-          INNER JOIN gebruiker ON chat.bieder = gebruiker.idGebruiker
-          INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
-          INNER JOIN gebruiker as gebruiker2 ON advertentie.idGebruiker = gebruiker2.idGebruiker
-          WHERE chat.bieder = ? OR advertentie.idGebruiker = ?";
+advertentie.idGebruiker, gebruiker2.Bedrijfsnaam as verkoperNaam, advertentie.Naam as advertentieNaam
+FROM chat
+INNER JOIN gebruiker ON chat.bieder = gebruiker.idGebruiker
+INNER JOIN advertentie ON chat.idadvertentie = advertentie.idadvertentie
+INNER JOIN gebruiker as gebruiker2 ON advertentie.idGebruiker = gebruiker2.idGebruiker
+WHERE chat.bieder = ? OR advertentie.idGebruiker = ?";
 
 $stmt = $conn->prepare($query);
 $currentUserId = $_SESSION['idGebruiker'];
@@ -126,13 +127,15 @@ $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $otherrUsername = ($row["idGebruiker"] == $currentUserId) ? $row["gebruikerNaam"] : $row["verkoperNaam"];
-        $idChat = $row["idchat"];
-        echo "<div><a class='menu__item' href='chat.php?idchat=$idChat'>$otherrUsername</a></div>";
-    }
+while ($row = $result->fetch_assoc()) {
+$otherUsername = ($row["idGebruiker"] == $currentUserId) ? $row["gebruikerNaam"] : $row["verkoperNaam"];
+$adName = $row["advertentieNaam"];  // Get the name of the advertisement
+$idChat = $row["idchat"];
+echo "<div><a class='menu__item' href='chat.php?idchat=$idChat'>$otherUsername - $adName</a></div>"; // Display both user and advertisement name
+}
 }
 $stmt->close();
+
 ?>
 
 

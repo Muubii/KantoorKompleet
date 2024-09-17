@@ -13,6 +13,7 @@ function sendMessage() {
         if (xhr.readyState === 4 && xhr.status === 200) {
             document.getElementById("message").value = '';
             ophalenMessages();
+            updateScroll();
         } else if (xhr.readyState === 4) {
             console.error('Error sending message:', xhr.status, xhr.statusText);
         }
@@ -47,3 +48,8 @@ document.getElementById("message").addEventListener("keypress", function(event) 
     }
 });
 
+function updateScroll() {
+    const chatContent = document.querySelector('.chat-content');
+    // Scroll to the bottom of the chat content
+    chatContent.scrollTop = chatContent.scrollHeight;
+  }

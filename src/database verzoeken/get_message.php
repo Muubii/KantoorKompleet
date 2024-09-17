@@ -27,8 +27,9 @@ $stmt->execute();
 $chatDetails = $stmt->get_result()->fetch_assoc();
 
 if (!$chatDetails) {
-    die("Chatgegevens niet gevonden.");
+    die();
 }
+
 
 // Haal de benodigde gegevens op
 $buyerName = $chatDetails['gebruikerNaam'];

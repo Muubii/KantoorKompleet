@@ -195,7 +195,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
             </div>
         </div>
     </div>
-    <script src="js/advertentie.js"></script>
+    <script src="js/advertentieinfo.js"></script>
     <script src="js/header.js"></script>
     <script src ="js/advertentie.js"></script>
     <script src="js/geldinput.js"></script>
