@@ -30,13 +30,6 @@ main{
   font-weight: bold;
 }
 
-/* .sidebar {
-  background-color: #F0F0F0;
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-} */
-
 .sidebar-item {
   background-color: #bbb;
   height: 50px;
@@ -58,60 +51,54 @@ main{
   text-align: center;
 }
 
-  .chat-content {
-    flex: 1;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    overflow-y: scroll;
-    /* overflow-y: auto; */
-    height: 20vh;
-  }
-
-/* .chat-bubble {
-  width: auto;
-  max-width: 50v0px;
-  height: auto;
-  background-color: #000;
-  border-radius: 0px 50px 50px 50px;
-  align-self: flex-start;
-  color: white;
-  padding: 10px;
+.chat-content {
   display: flex;
-  align-items: center;
-  word-wrap: break-word;
-  margin-top: 2vh;
-} */
-
-.chat-bubble {
-width: max-content;
-height: max-content;
-max-width: 5000px; 
-height: auto;
-background-color: #000;
-border-radius: 0px 50px 50px 50px;
-align-self: flex-start;
-color: white;
-padding: 10px;
-display: flex;
-align-items: center;
-word-wrap: break-word;
-margin-top: 2vh;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto; 
+  padding: 10px;
+  height: 100vh;
 }
 
+  .chat-bubble {
+    width: max-content;
+    max-width: 40%; 
+    height: auto;
+    background-color: #000;
+    border-radius: 0px 50px 50px 50px;
+    overflow-wrap: break-word;
+    align-self: flex-end;
+    color: white;
+    padding: 10px;
+    align-items: center;
+    margin-right: auto;
+    margin-top: 2vh;
+  }
+  
+  
+  .chat-bubble2 {
+    width: max-content;
+    max-width: 40%; 
+    height: auto;
+    background-color: #000;
+    border-radius: 50px 0px 50px 50px;
+    overflow-wrap: break-word;
+    align-self: flex-end;
+    color: white;
+    padding: 10px;
+    align-items: center;
+    margin-left: auto;
+    margin-top: 2vh;
+  }
+
 .chat-bubble2 {
-  width: max-content;
-  max-width: 5000px; 
-  height: auto;
-  background-color: #000;
-  border-radius: 50px 0px 50px 50px;
   align-self: flex-end;
-  color: white;
-  padding: 10px;
-  align-items: center;
-  margin-left: auto;
-  margin-top: 2vh;
+}
+
+@media (max-width: 650px) {
+  .chat-bubble, .chat-bubble2 {
+    max-width: 90%; /* Allows more width on smaller screens */
+  }
 }
 
 .chat-input {

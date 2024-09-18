@@ -59,7 +59,7 @@ if ($result->num_rows > 0) {
         // Controleer of het bericht van de huidige gebruiker is
         $isCurrentUser = ($isVerkooper && $sellerId == $currentUserId) || (!$isVerkooper && $buyerId == $currentUserId);
 
-        $bubbleClass = $isCurrentUser ? 'chat-bubble' : 'chat-bubble2';
+        $bubbleClass = $isCurrentUser ? 'chat-bubble2' : 'chat-bubble';
 
         // Toon het bericht met de naam en foto van de afzender
         echo '<div class="' . $bubbleClass . '">

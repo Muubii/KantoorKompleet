@@ -243,29 +243,34 @@
             <fieldset>
                 <legend>Biedingen</legend>
                 <?php
-                    $stmt = $conn->prepare($sql4);
-                    $stmt->execute();
-                    $result = $stmt->get_result();
-                    if($result->num_rows > 0){
-                        while($row = $result->fetch_assoc()){
-                            $bedrijsnaam = $row['Bedrijfsnaam'];
-                            $prijs = str_replace(".",",",''.$row['prijs'].'');
-                            $logolocatie = $row['logolocatie'];
-                            echo"<div class='bieding'>
-                                    <div class= 'bedrijfsnaam'>".
-                                        "<img src='afbeeldingenUsers/profielIcons/$logolocatie' class='biedingBedrijfIcons'>
-                                        <p>".$bedrijsnaam."</p>
-                                    </div>
-                                    <div class='geldEnChatBox'>
-                                        <p class='prijs'>".'€'.$prijs."</p>
-                                        <button class='startChatBtn'><img src='images/icons/chaticon.svg' class='startChatIcon'></button>
-                                    </div>
-                                </div>";
-                        }
-                    } else{
-                        echo "geen biedingen op dit moment";
+                $stmt = $conn->prepare($sql4);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                if($result->num_rows > 0){
+                    while($row = $result->fetch_assoc()){
+                        $bedrijfsnaam = $row['Bedrijfsnaam'];
+                        $prijs = str_replace(".",",",''.$row['prijs'].'');
+                        $logolocatie = $row['logolocatie'];
+                        $idGebruiker = $row['idGebruiker']; // Assign the user ID to a variable
+                        
+                        echo "<div class='bieding'>
+                                <div class='bedrijfsnaam'>
+                                    <img src='afbeeldingenUsers/profielIcons/$logolocatie' class='biedingBedrijfIcons'>
+                                    <p>$bedrijfsnaam</p>
+                                </div>
+                                <div class='geldEnChatBox'>
+                                    <p class='prijs'>€$prijs</p>
+                                    <button onclick='startChat($idGebruiker)' class='startChatBtn'>
+                                        <img src='images/icons/chaticon.svg' class='startChatIcon'>
+                                    </button>
+                                </div>
+                            </div>";
                     }
-                ?>
+                } else {
+                    echo "geen biedingen op dit moment";
+                }
+?>
+
             </fieldset>
             </div>
             <div class="update-verwijderBtnsBox">
@@ -278,7 +283,7 @@
 
 <script src="js/geldinput.js"></script>
 <script src="js/header.js"></script>
-
+<script src="js/chat.js"></script>
 <script src="js/sorteblegrid.js"></script>
 <script src="js/advertentieinfo.js"></script>
 </body>
