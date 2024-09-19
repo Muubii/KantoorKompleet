@@ -110,7 +110,12 @@ $stmt->close();
     </header>
 
     <main>
-        <div class="sidebar-mm">
+
+<div class ="sidebar-right">
+
+<div class="sidebar-mm">
+
+
 <?php
 $query = "SELECT gebruiker.Bedrijfsnaam as gebruikerNaam, chat.bieder, chat.idchat, chat.idadvertentie, 
 advertentie.idGebruiker, gebruiker2.Bedrijfsnaam as verkoperNaam, advertentie.Naam as advertentieNaam
@@ -140,12 +145,19 @@ $stmt->close();
 
 
 </div>
+</div>
         <div class="chat-window">
+        <div class="hamburger-menu" onclick="toggleSidebar()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+        </div>
             <div class="chat-header">Chat with <span id="chatWith"><?php echo $otherUsername;?></span></div>
             <div class="chat-content">
                 <div id="chatBox"></div>
             </div>
 
+            
             <div class="chat-input">
                 <input type="hidden" id="idchat" value="<?php echo $idchat; ?>">
                 <input type="hidden" id="isverkooper" value="<?php echo $isverkooper; ?>">
@@ -157,6 +169,10 @@ $stmt->close();
 
 
 <script src="js/header.js"></script>
-<script src="js/chatSendMessage.js"></script>
+<script src="js/chatSendMessage.js">
+
+
+
+</script>
 </body>  
 </html>

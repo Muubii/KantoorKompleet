@@ -47,9 +47,10 @@ document.getElementById("message").addEventListener("keypress", function(event) 
         sendMessage();
     }
 });
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const sidebar = document.querySelector('.sidebar-mm');
 
-function updateScroll() {
-    const chatContent = document.querySelector('.chat-content');
-    // Scroll to the bottom of the chat content
-    chatContent.scrollTop = chatContent.scrollHeight;
-  }
+hamburgerMenu.addEventListener('click', () => {
+  sidebar.classList.toggle('active'); // Toggles the visibility of the menu items
+});
+
